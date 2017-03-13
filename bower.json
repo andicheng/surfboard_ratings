@@ -1,0 +1,26 @@
+{
+  "name": "login_reg",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Anderson Cheng <andicheng@yahoo.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/andicheng/test_project",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-socialshare": "^1.4.5"
+  },
+  "resolutions": {
+    "angular-socialshare": "^2.3.4"
+  }
+}

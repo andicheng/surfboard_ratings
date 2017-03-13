@@ -1,0 +1,303 @@
+<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+<!-- ************************MAP*********************** -->
+<!DOCTYPE html>
+<meta name="viewport" content="initial-scale=1.0">
+<!-- <script>
+   var map;
+   function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+         center: {lat: 0.165902, lng: 0.518463},
+         zoom: 2
+      });
+   }
+</script>
+<script async defer
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9zEze3L8tRr1_-DH6mi44KV5jpvKXnG8&callback=initMap">
+</script>
+<style>
+      #map {
+         background-color: white;
+         height: 350px;
+         width: 900px;
+         margin-bottom: 20px;
+         margin-left: 10%;
+      }
+</style> -->
+<!-- ************************************************************* -->
+
+<div id="container" ng-controller="dashboardController">
+   <!-- <img id="wide_panoramic" src="../assets/images/wide_panoramic.jpg"> -->
+   <!-- <div id="mapholder">
+      <div id="map"></div>
+   </div> -->
+   <div class="col6 offset-left2">
+         <button class="btn btn-medium font-bold"
+                socialshare
+                socialshare-provider="email"
+                socialshare-body= {{url}}
+                socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                socialshare-subject="SurfboardRatings.com"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400">
+            <i class="fa fa-envelope"></i> Email
+         </button>
+         <button class="btn btn-medium font-bold"
+               socialshare
+               socialshare-provider="facebook"
+               socialshare-type="sharer"
+               socialshare-text="Surfing Destinations Reviews"
+               socialshare-url= "SurfboardRatings.com"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click">
+            <i class="fa fa-facebook"></i> Facebook
+         </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="twitter"
+                 socialshare-hashtags="travel, surfing, surfing travel, surfing destinations"
+                 socialshare-via="twitter"
+                 socialshare-text= {{url}}
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-twitter"></i> Twitter
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="google"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-google-plus"></i> G+
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
+                 socialshare-provider="pinterest"
+                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-pinterest"></i> Pinterest
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="wordpress"
+                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-wordpress"></i> Wordpress
+          </button>
+   </div>
+   <div id="left_block">
+      <div id='articles'>
+         <h3>Articles</h3>
+         <div id='articleblock'>
+            <div ng-repeat="article in articles | orderBy: '-updatedAt'">
+               <p><b><a id='articlelink' href='#/article/{{article.title}}'>{{article.title}}</a></b> - Added on {{article.updatedAt | date:'MM/dd/yyyy'}}</p>
+               <p>{{article.headline}}</p>
+            </div>
+         </div>
+      </div>
+      <div id="locations">
+         <h3>Recent Posts</h3>
+         <label><input ng-model="filter" placeholder="filter.."></label>
+         <div id="recentTrip">
+            <div id="trip" ng-animate="'animate'" ng-repeat="trip in trips | filter: filter | limitTo: 12 | orderBy: '-createdAt'">
+               <b><i><a class="regionlink" href="#/region/{{trip.region}}">{{trip.region}}</a> - <a id="arealink" href="#/country/{{trip.country}}">{{trip.country}}</a>: <a id="arealink" href="#/area/{{trip.area}}">{{trip.area}}</a></i></b>
+               <b><p><a class="regionlink" href="#/trip/{{trip._id}}">{{trip.title}}</a></p></b>
+               <p>Posted by <a id="userlink" href="#/user/{{trip._user._id}}">{{trip._user.username}}</a> on {{trip.createdAt | date:'MM/dd/yyyy'}}</p>
+                  <p>Trip Period: {{trip.tripmonth}} {{trip.tripyear}}</p>
+                  <div class="rating">
+                     Overall Rating: {{trip.rating}}
+                     <br>Surfing Conditions Rating: {{trip.surfrating}}
+                  </div>
+                  <div class="rating">
+                     Amenities Rating: {{trip.amenitiesrating}}
+                     <br>Other Activities Rating: {{trip.activitiesrating}}
+                  </div>
+               <p id="description">{{trip.description}}</p>
+               <span class='thumbs'>{{trip.thumbsup.length}}</span><a href="" ng-click='tripthumbsup(trip)'><i class="em em---1"></i></a><span class="thumbs">{{trip.thumbsdown.length}}</span><a href="" ng-click='tripthumbsdown(trip)'><i class="em em--1"></i></a> <button class='reportcomment' ng-click='reporttrip = !reporttrip'>Report</button><br>
+               <form class='report' ng-show='reporttrip'>
+                  <h4>I am reporting this comment as:</h4>
+                  <input class='reportfield' type='text' ng-model='report.report'>
+                  <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(trip,report)">
+                  <p class='reporttext'>Reported comments and users will be reviewed by SurfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="newTrip">
+      <h3>Share Your Experiences <span ng-if="user"><a id="userlink" href="#/user/{{user._id}}">{{user.username}}</a></span></h3><b><span id="noUser" ng-if="!user">(Please register or log in to continue!)</span></b>
+      {{errors.title.message}}
+      <form ng-show="user">
+         <h5>Select a region</h5>
+         <p><select style="width: 40%" ng-model="myTrip.region">
+            <option class="dropdown" value="North America">North America</option>
+            <option value="Central America">Central America</option>
+            <option value="South America">South America</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Europe">Europe</option>
+            <option value="Australia / New Zealand">Australia / New Zealand</option>
+            <option value="Africa">Africa</option>
+            <option value="Central Asia">Central Asia</option>
+            <option value="South East Asia">South East Asia</option>
+            <option value="Pacific Islands">Pacific Islands</option>
+         </select></p>
+         <h5>Provide a country or territory</h5>
+         <p><select style="width: 40%" ng-model="myTrip.country" ng-options="trip.country for trip in trips | filter:{region:myTrip.region} | unique:'country'">
+            <option class="dropdown" ng-disabled='true' ng-selected='true' value={{trip.country}}>Select a country</option>
+         </select>
+         or
+         <input style="width: 40%" id="area" type="text" ng-model="myTrip.country2" placeholder="Enter a new country"></p>
+         <h5>Provide a local area (optional)</h5>
+         <p><select style="width: 40%" ng-model="myTrip.area" ng-options="trip.area for trip in trips | filter:{region:myTrip.region} | filter:{country:myTrip.country.country}:true | unique:'area'">
+            <option class="dropdown" value="{{trip.area}}">Select an area</option>
+         </select>
+         or
+         <input style="width: 40%" id="area" type="text" ng-model="myTrip.area2" placeholder="Enter a new area"></p>
+         <p><h5>Primary Trip Month:
+            <select ng-model="myTrip.tripmonth">
+               <option value="Jan">Jan</option>
+               <option value="Feb">Feb</option>
+               <option value="Mar">Mar</option>
+               <option value="Apr">Apr</option>
+               <option value="May">May</option>
+               <option value="Jun">Jun</option>
+               <option value="Jul">Jul</option>
+               <option value="Aug">Aug</option>
+               <option value="Sep">Sep</option>
+               <option value="Oct">Oct</option>
+               <option value="Nov">Nov</option>
+               <option value="Dec">Dec</option>
+            </select>
+            Trip Year:
+            <input style="width: 20%" type="text" ng-model="myTrip.tripyear">
+         </h5></p>
+         <h5>Provide a title for your trip</h5>
+         <p><input id="title" type="text" ng-model='myTrip.title'></p>
+         <h5>Provide details of your trip</h5>
+         <pre><textarea id="desc" type="text" ng-model='myTrip.description'></textarea></pre>
+         <h5>Rate your overall experience on this trip<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="myTrip.rating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Rate the surfing conditions (wave quality, crowds, etc...)<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="myTrip.surfrating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Rate the amenities (restaurants/bars, transportation, etc...) <br>(0 worst - 10 best)</h5>
+         <p><select ng-model="myTrip.amenitiesrating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Rate other activies (sightseeing, fishing, etc..)<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="myTrip.activitiesrating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <input id="submit" type="submit" value='Submit' ng-click='newTrip()'>
+      </form>
+   </div>
+   <div id="regions">
+      <img class="panoramic" src="../assets/images/panoramic1.jpg" alt="missing photo">
+      <h3 class="regionsummary">Region Summary</h3>
+      <div ng-repeat="region in regions | orderBy:'region'"><b><i><a class="regionlink" href="#/region/{{region.region}}">{{region.region}}:</a></i></b> Rated {{region.count}} Time<span ng-show="region.count>1">s</span><br>
+         <div class="rating">
+            Overall: {{region.averageRating}}
+            <br>Surf: {{region.averagesurfRating}}
+         </div>
+         <div class="rating">
+            Amenities: {{region.averageamenitiesRating}}
+            <br>Activities: {{region.averageactivitiesRating}}
+         </div>
+      </div>
+   </div>
+   <div id="countries">
+      <img class="panoramic" src="../assets/images/panoramic3.jpg" alt="missing photo">
+      <h3 class="regionsummary">Best Rated Countries/Territories</h3>
+      <div ng-repeat="country in countries | orderBy:'-averageRating' | limitTo: 15"><b><i><a class="countrylink" href="#/country/{{country.country}}">{{country.country}}:</a></i></b> Rated {{country.count}} Time<span ng-show="country.count>1">s</span><br>
+         <div class="rating">
+            Overall: {{country.averageRating}}
+            <br>Surf: {{country.averagesurfRating}}
+         </div>
+         <div class="rating">
+            Amenities: {{country.averageamenitiesRating}}
+            <br>Activities: {{country.averageactivitiesRating}}
+         </div>
+      </div>
+   </div>
+   <div id="areas">
+      <img class="panoramic" src="../assets/images/panoramic2.jpg" alt="missing photo">
+      <h3 class="regionsummary">Best Rated Areas</h3>
+      <div ng-repeat="area in areas | orderBy:'-averageRating' | limitTo: 20" ng-if="area.area!='Area not specified' && area.area!='No area specified'"><b><i><a class="countrylink" href="#/area/{{area.area}}">{{area.area}}:</a></i></b> Rated {{area.count}} Time<span ng-show="area.count>1">s</span><br>
+         <div class="rating">
+            Overall: {{area.averageRating}}
+            <br>Surf: {{area.averagesurfRating}}
+         </div>
+         <div class="rating">
+            Amenities: {{area.averageamenitiesRating}}
+            <br>Activities: {{area.averageactivitiesRating}}
+         </div>
+      </div>
+   </div>
+   <!-- <div id="map"></div>
+   <meta name="viewport" content="initial-scale=1.0">
+   <script>
+      var map;
+      function initMap() {
+         map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 7.165902, lng: 0.518463},
+            zoom: 2
+         });
+      }
+   </script>
+   <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9zEze3L8tRr1_-DH6mi44KV5jpvKXnG8&callback=initMap">
+   </script> -->
+</div>

@@ -1,0 +1,100 @@
+<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+<!-- ************************MAP*********************** -->
+<!DOCTYPE html>
+<meta name="viewport" content="initial-scale=1.0">
+
+<div id="container" ng-controller="dashboardController">
+   <!-- <img id="wide_panoramic" src="../assets/images/wide_panoramic.jpg"> -->
+   <div class="col6 offset-left2">
+         <button class="btn btn-medium font-bold"
+                socialshare
+                socialshare-provider="email"
+                socialshare-body= {{url}}
+                socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                socialshare-subject="Surfboard Reviews"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400">
+            <i class="fa fa-envelope"></i> Email
+         </button>
+         <button class="btn btn-medium font-bold"
+               socialshare
+               socialshare-provider="facebook"
+               socialshare-type="sharer"
+               socialshare-text="surfboard reviews"
+               socialshare-url= "surfboards.com"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click">
+            <i class="fa fa-facebook"></i> Facebook
+         </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="twitter"
+                 socialshare-hashtags="surfboard, surfing, surfboard reviews"
+                 socialshare-via="twitter"
+                 socialshare-text= {{url}}
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-twitter"></i> Twitter
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="google"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-google-plus"></i> G+
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
+                 socialshare-provider="pinterest"
+                 socialshare-text="surfboard reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-pinterest"></i> Pinterest
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="wordpress"
+                 socialshare-text="surfboard reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-wordpress"></i> Wordpress
+          </button>
+   </div>
+   <div id="about">
+      <h2>We aim to build a community for surfers and those seeking to join us in our everlesting quest to find the right surfboards for our quivers</h2>
+      <p>At SurfboardRatings.com, our goal is to provide a platform in which current and prospective surfers can mutually benefit
+         through constructive reviews and commentary on different surfboards. Being surfers ourselves, we understand how important the
+         right surfboard purchase decisions are to enjoying the sport, in addition to how fun the process of researching and building
+         one's quiver can be. At the same time, we understand how the wrong purchase decisions can limit your enjoyment of such
+         a fantastic sport and pastime, can slow your learning progress, and can be very costly financially as new surfboard
+         prices continue to creep up to and sometimes exceed the $1,000 mark. There are so many variables in choosing a surfboard,
+         including but not limited to:</p>
+         <ul>
+            <li>one's experience and proficiency level,</li>
+            <li>one's physical attributes, such as height, weight, age, and level of condition,</li>
+            <li>one's preferences in the type of surfing enjoyed,</li>
+            <li>the prevalent wave conditions in which the surfboard is used,</li>
+            <li>the surfboard type (longboard, shortboard, hybrid, etc...),</li>
+            <li>surfboard construction (PU vs EPS, etc...)
+            <li>surfboard shape (length, width, volume distribution, bottom surface contour such as concavity and amount of rocker, etc...),</li>
+            <li>surfboard volume,</li>
+            <li>fin setup (thruster, quad, FCS vs Futures).</li>
+         </ul>
+         <br>
+         <br>
+         <img src='../assets/images/about.jpg'>
+         <br>
+      <p>With so many different variables impacting a user's experience, it is our belief that there is no better source of information about a surfboard than the countless individuals that are using
+         these boards day-in and day-out. Through your continued input and support, we aim to take some of the frustration and guesswork
+         out of choosing the correct surfboard so that we can have the tools and the ability to ultimately focus on what's most important, having as much fun as possible in the water.
+</div>

@@ -1,0 +1,150 @@
+*{
+   color: white;
+   margin: 0px;
+   padding: 0px;
+}
+fieldset{
+   padding: 10px;
+   line-height: 25px;
+   height: 250px;
+}
+span {
+   display: inline-block;
+   width: 140px;
+}
+input{
+   background-color: white;
+   color: black;
+}
+#submit{
+   padding: 2px 5px;
+}
+#body{
+   background-color: #0A384F;
+   width: 100%;
+   max-width: 1200px;
+   min-width: 960px;
+   margin: auto;
+}
+#container{
+   max-width: 1200px;
+   min-width: 960px;
+   margin: auto;
+}
+#bar{
+   padding-top: 5px;
+   padding-bottom: 5px;
+   color: white;
+}
+#bar a{
+   text-decoration: none;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   padding-left: 15px;
+   padding-right: 15px;
+   color: white;
+}
+#bar a:hover{
+   color: yellow;
+}
+#header{
+   background-color: #0A384F;
+   color: white;
+   margin-bottom: 10px;
+   border-style: solid;
+   border-width: 1px;
+   border-color: lightgrey;
+}
+#submit{
+   color: darkblue;
+}
+#footer{
+   padding: 5px 10px;
+   background-color: #0A384F;
+}
+#copyright{
+   font-size: 13px;
+}
+.foot{
+   display: inline-block;
+   width: 24%;
+   text-align: center;
+   color: white;
+}
+.foot a{
+   color: white;
+   text-decoration: none;
+}
+.foot a:hover{
+   color: yellow;
+}
+#legal{
+   margin-right: 1%;
+   margin-bottom: 20px;
+   padding: 1%;
+   border-style: solid;
+   border-color: lightgrey;
+   border-width: thin;
+   background-color: white;
+   opacity: 0.85;
+}
+#dmca{
+   margin-right: 1%;
+   margin-bottom: 20px;
+   padding: 1%;
+   border-style: solid;
+   border-color: lightgrey;
+   border-width: thin;
+   background-color: white;
+   opacity: 0.85;
+}
+#about{
+   margin-right: 1%;
+   margin-bottom: 20px;
+   padding: 1%;
+   border-style: solid;
+   border-color: lightgrey;
+   border-width: thin;
+   background-color: white;
+   opacity: 0.85;
+}
+#contact{
+   margin-right: 1%;
+   margin-bottom: 20px;
+   padding: 1%;
+   border-style: solid;
+   border-color: lightgrey;
+   border-width: thin;
+   background-color: white;
+   opacity: 0.85;
+}
+.lettered{
+   list-style-type: lower-alpha;
+   margin-left: 20px;
+}
+ul{
+   margin-left: 20px;
+   margin-top: 3px;
+   margin-bottom: 3px;
+   list-style-position: inside;
+}
+p{
+   margin-top: 5px;
+   margin-bottom: 5px;
+   text-align: justify;
+}
+h4{
+   margin-top: 10px;
+   margin-bottom: 5px;
+}
+h2{
+   width: 50%;
+   margin-left: 25%;
+   text-align: center;
+   padding: 20px;
+}
+#message{
+   width: 50%;
+   height: 80px;
+   margin-left: 10px;
+}

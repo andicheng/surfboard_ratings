@@ -1,0 +1,88 @@
+<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+<!-- ************************MAP*********************** -->
+<!DOCTYPE html>
+<meta name="viewport" content="initial-scale=1.0">
+
+<div id="container" ng-controller="dashboardController">
+   <!-- <img id="wide_panoramic" src="../assets/images/wide_panoramic.jpg"> -->
+   <div class="col6 offset-left2">
+         <button class="btn btn-medium font-bold"
+                socialshare
+                socialshare-provider="email"
+                socialshare-body= {{url}}
+                socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                socialshare-subject="SurfboardRatings.com"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400">
+            <i class="fa fa-envelope"></i> Email
+         </button>
+         <button class="btn btn-medium font-bold"
+               socialshare
+               socialshare-provider="facebook"
+               socialshare-type="sharer"
+               socialshare-text="Surfing Destinations Reviews"
+               socialshare-url= "SurfboardRatings.com"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click">
+            <i class="fa fa-facebook"></i> Facebook
+         </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="twitter"
+                 socialshare-hashtags="travel, surfing, surfing travel, surfing destinations"
+                 socialshare-via="twitter"
+                 socialshare-text= {{url}}
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-twitter"></i> Twitter
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="google"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-google-plus"></i> G+
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
+                 socialshare-provider="pinterest"
+                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-pinterest"></i> Pinterest
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="wordpress"
+                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-wordpress"></i> Wordpress
+          </button>
+   </div>
+   <div id="about">
+      <h2>We aim to build a community for surfers and those seeking to join us in our quest to find and explore the best surf destinations around the world</h2>
+      <p>At SurfboardRatings.com, our goal is to provide a platform in which current and prospective surfers can share their experiences as they travel around the world, and learn from others' journeys.
+         As surfers ourselves, we understand that one of the greatest joys in this fantastic sport and pasttime is the exploration of new surf spots, and the opportunity to experience and learn from
+         new cultures. Personally, some of our best surfing experiences have occurred as we travelled to such countries as Indonesia, Costa Rica, Nicaragua, and Ecuador. In these journeys,
+         we have not only had the opportunity to find awesome and uncrowded waves, but we have also met some wonderful locals and expats, found and enjoyed new cuisines,
+         and traversed some incredibly scenic areas. However, we have also experienced the other end of the spectrum, such as going to crowded and dirty breaks, and staying in towns that were not a good match
+         with our wants and needs.
+         <br>
+         <br>
+         <img src='../assets/images/about.jpg'>
+         <br>
+      <p>With so many different variables impacting a traveller's experience, it is our belief that there is no better source of information about a surfing destination than the countless
+         individuals that are experiencing these areas first-hand. Through your continued input and support, we aim to arm us and our fellow surfers with the information needed to
+         make the best informed decisions as we plan our new adventures.
+</div>

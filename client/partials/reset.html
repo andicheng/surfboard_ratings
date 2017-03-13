@@ -1,0 +1,14 @@
+<link rel="stylesheet" type="text/css" href="assets/css/login.css">
+
+<div ng-controller="log_regController">
+   <fieldset>
+      <legend>Reset Password</legend>
+      {{errors.login.message}}
+      {{errors.confirm}}
+      <form>
+         <p>New Password: <input type="password" ng-model="user.password"></p>
+         <p>Confirm Password: <input type="password" ng-model="user.confirm"></p>
+         <input id="submit" type="submit" value="Update Password" ng-click="reset(user)">
+      </form>
+   </fieldset>
+</div>

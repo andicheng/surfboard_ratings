@@ -1,0 +1,14 @@
+<link rel="stylesheet" type="text/css" href="assets/css/login.css">
+
+<div ng-controller="log_regController">
+   <fieldset>
+      <legend>Password Reset</legend>
+      {{errors.login.message}}
+      <form>
+         <p>email: <input type="text" ng-model="user.email"></p>
+         <input id="submit" type="submit" value="Reset Password" ng-click="forgot(user)">
+      </form>
+
+<!-- {{friend.birthdate | date:'MM/dd/yyyy'}} -->
+   </fieldset>
+</div>

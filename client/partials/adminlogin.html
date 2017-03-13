@@ -1,0 +1,15 @@
+<link rel="stylesheet" type="text/css" href="assets/css/login.css">
+
+<div ng-controller="log_regController">
+   <fieldset>
+      <legend>Admin Login</legend>
+      {{errors.login.message}}
+      <form>
+         <p>email: <input type="text" ng-model="admin.email"></p>
+         <p>Password: <input type="password" ng-model="admin.password"></p>
+         <input id="submit" type="submit" value="Log In" ng-click="adminlogin(admin)">
+      </form>
+
+<!-- {{friend.birthdate | date:'MM/dd/yyyy'}} -->
+   </fieldset>
+</div>

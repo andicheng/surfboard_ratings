@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+<!-- ************************MAP*********************** -->
+<!DOCTYPE html>
+<meta name="viewport" content="initial-scale=1.0">
+
+<div id="container" ng-controller="contactController">
+   <!-- <img id="wide_panoramic" src="../assets/images/wide_panoramic.jpg"> -->
+
+   <div id='contact'>
+      {{errors.login.message}}
+      <form>
+         <p>Name:</p>
+         <p><input type="text" ng-model='contact.personname'></p>
+         <p>email:</p>
+         <p><input type="text" ng-model='contact.email'></p>
+         <p>Subject:</p>
+         <p><input type="text" ng-init="contact.subject='DCMA Notice Submittal'" placeholder="DCMA Notice Submittal" value="DCMA Notice Submittal" ng-model='contact.subject'></p>
+         <p>Message:</p>
+         <textarea id="message" type="text" ng-model='contact.message'></textarea><br>
+         <input type="submit" value="Send Message" ng-click='sendcontact(contact)'>
+</div>

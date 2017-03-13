@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="assets/css/registration.css">
+
+<div ng-controller="log_regController">
+   <fieldset>
+      <legend>Registration</legend>
+      <form>
+         {{errors.first_name.message}}
+         <p><span class="label">First Name:</span><input type="text" ng-model="newUser.first_name"></p>
+         {{errors.last_name.message}}
+         <p><span class="label">Last Name:</span><input type="text" ng-model="newUser.last_name"></p>
+         {{errors.last_name.message}}
+         <p><span class="label">Username:</span><input type="text" ng-model="newUser.username"></p>
+         {{errors.username.message}}
+         <p><span class="label">email:</span><input type="email" ng-model="newUser.email"></p>
+         <!-- {{errors.birthdate.message}}
+         <p>Birth Date: <input type="date" ng-model='newUser.birthdate'></p> -->
+         {{errors.password.message}}
+         <p><span class="label">Password:</span><input type="password" ng-model='newUser.password'></p>
+         {{errors.confirm}}
+         <p><span class="label">Confirm Password:</span><input type="password" ng-model='newUser.confpass'></p>
+         <input id="submit" type="submit" value="Register" ng-click="register()">
+      </form>
+
+<!-- {{User.birthdate | date:'MM/dd/yyyy'}} -->
+   </fieldset>
+</div>

@@ -1,0 +1,19 @@
+<!-- <link rel="stylesheet" type="text/css" href="assets/css/login.css"> -->
+
+<div ng-controller="articleController">
+   <fieldset>
+      <legend>Admin</legend>
+      <form>
+         <h4>Enter New Article</h4>
+         <h5>Provide a Title</h5>
+         <input type="text" ng-model="article.title">
+         <h5>Provide a Headline</h5>
+         <textarea id='headline' style="width: 80%; height: 40px; color: black" type='text' ng-model='article.headline'></textarea>
+         <h5>Provide an Author</h5>
+         <input type='text' ng-model='article.author'>
+         <h5>Provide the HTML text</h5>
+         <textarea id='text' style="width: 80%; height: 600px; color: black" type='text' ng-model='article.text'></textarea>
+         <input id="submit" type="submit" value='Submit' ng-click='newArticle()'>
+      </form>
+   </fieldset>
+</div>
