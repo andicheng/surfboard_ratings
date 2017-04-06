@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/user.css">
 
 <div id="container" ng-controller="userController">
+   <update-title title="Surfboard Reviews - {{surfboards[0].user.username}}"></update-title>
+   <update-meta name="description" content="Surfing Journeys - Share your surf travel experiences, and learn from other users' surfboards and reviews."></update-meta>
    <div class="col6 offset-left2">
          <button class="btn btn-medium font-bold"
                 socialshare
@@ -16,7 +18,7 @@
                socialshare
                socialshare-provider="facebook"
                socialshare-type="sharer"
-               socialshare-text="Surfing Destinations Reviews"
+               socialshare-text="Surfboard Reviews"
                socialshare-url= "SurfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
@@ -48,7 +50,7 @@
                  socialshare
                  socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
                  socialshare-provider="pinterest"
-                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-text="Surfboard Reviews"
                  socialshare-url= {{url}}
                  socialshare-popup-height="300"
                  socialshare-popup-width="400"
@@ -58,7 +60,7 @@
           <button class="btn btn-medium font-bold"
                  socialshare
                  socialshare-provider="wordpress"
-                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-text="Surfboard Reviews"
                  socialshare-url= {{url}}
                  socialshare-popup-height="300"
                  socialshare-popup-width="400"
@@ -68,44 +70,55 @@
    </div>
    <div id="user">
       <p><font color="red"><b><i>{{errors.text.message}}</i></b></font></p>
-      <h3>Trips posted by {{trips[0]._user.username}}</h3>
+      <h3>Surfboard reviews posted by {{surfboards[0].user[0].username}}</h3>
       Sort: <select id="sort" ng-model='sortorder'>
          <option value="-createdAt">Date Posted</option>
          <option value="-rating">Rating</option>
          <option value="country">Country</option>
       </select>
-      <label><input ng-model="filter" placeholder="filter.."></label>
-      <p>Member since: {{trips[0]._user.createdAt | date:'MMM dd, yyyy'}}</p>
-      <p>Trip Count: {{trips.length}}
-      <div id="trip" ng-repeat="trip in trips | filter: filter | orderBy:sortorder">
-         <p><b><i><a id="regionlink" href="#/region/{{trip.region}}">{{trip.region}}</a> - <a id="countrylink" href="#/country/{{trip.country}}">{{trip.country}}</a>: <a id="arealink" href="#/area/{{trip.area}}">{{trip.area}}</a></i></b></p>
-         <p><b>{{trip.title}}</b></p>
-         <p>Posted on {{trip.createdAt | date:'MMM dd, yyyy'}}</p>
-         <p>Trip Period: {{trip.tripmonth}} {{trip.tripyear}}</p>
+      <label><input class='input' ng-model="filter" placeholder="filter.."></label>
+      <p>Member Since: {{surfboards[0].user[0].createdAt | date:'MMM dd, yyyy'}}</p>
+      <p>Surfing Since: {{surfboards[0].user[0].surfingsince | date:'MMM, yyyy'}}</p>
+      <p>Surfboard Review Count: {{surfboards.length}}
+      <div id="surfboard" ng-repeat="surfboard in surfboards | filter: filter | orderBy:sortorder">
+         <!-- <p><b><i><a id="regionlink" href="#/region/{{surfboard.region}}">{{surfboard.region}}</a> - <a id="countrylink" href="#/country/{{surfboard.country}}">{{surfboard.country}}</a>: <a id="arealink" href="#/area/{{surfboard.area}}">{{surfboard.area}}</a></i></b></p> -->
+         <p><b><a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="typelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a> - {{surfboard.customdims}} dimensions</b></p>
+         <p>Posted on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
          <div class="rating">
-            Overall Rating: {{trip.rating}}
-            <br>Surfing Conditions Rating: {{trip.surfrating}}
+            User age: {{surfboard.user[0].age}}
+            <br>User weight: {{surfboard.user[0].weight}}
+            <br>User height: {{surfboard.user[0].height}}
          </div>
          <div class="rating">
-            Amenities Rating: {{trip.amenitiesrating}}
-            <br>Other Activities Rating: {{trip.activitiesrating}}
+            User experience level: {{surfboard.user[0].level}}
+            <br>User fitness level: {{surfboard.user[0].fitness}}
          </div>
-         <p id="description">{{trip.description}}</p>
-         <span class='thumbs'>{{trip.thumbsup.length}}</span><a href="" ng-click='tripthumbsup(trip)'><i class="em em---1"></i></a><span class="thumbs">{{trip.thumbsdown.length}}</span><a href="" ng-click='tripthumbsdown(trip)'><i class="em em--1"></i></a>   <button class='reportcomment' ng-click='reporttrip = !reporttrip'>Report</button><br>
-         <form class='report' ng-show='reporttrip'>
+         <p>Overall Rating: {{surfboard.rating}}</p>
+         <div class="rating">
+            Speed Rating: {{surfboard.speedrating}}
+            <br>Maneuverability Rating: {{surfboard.maneuverabilityrating}}
+         </div>
+         <div class="rating">
+            Stability Rating: {{surfboard.stabilityrating}}
+            <br>Paddle Rating: {{surfboard.paddlerating}}
+         </div>
+         <p>Review: {{surfboard.review}}</p>
+         <!-- <p id="description">{{surfboard.description}}</p> -->
+         <span class='thumbs'>{{surfboard.thumbsup.length}}</span><a href="" ng-click='surfboardthumbsup(surfboard)'><i class="em em---1"></i></a><span class="thumbs">{{surfboard.thumbsdown.length}}</span><a href="" ng-click='surfboardthumbsdown(surfboard)'><i class="em em--1"></i></a>   <button class='reportcomment' ng-click='reportsurfboard = !reportsurfboard'>Report</button><br>
+         <form class='report' ng-show='reportsurfboard'>
             <h4>I am reporting this comment as:</h4>
             <input class='reportfield' type='text' ng-model='report.report'>
-            <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(trip,report)">
+            <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(surfboard,report)">
             <p class='reporttext'>Reported comments and users will be reviewed by SurfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
          </form>
          <h4 class='commentsHeading'>Comments:</h4>
          <form id="newcomment">
             <textarea id="post" type="text" ng-change="testuser()" ng-model='post[$index].text'></textarea>
-            <input class="submit" type="submit" value="Post a Comment" ng-click="newPost(trip._id, post[$index])">
+            <input class="submit" type="submit" value="Post a Comment" ng-click="newPost(surfboard._id, post[$index])">
          </form>
-         <div id="posts" ng-repeat="post in trip.posts | orderBy:'-createdAt'">
+         <div id="posts" ng-repeat="post in surfboard.posts | orderBy:'-createdAt'">
             <p id="oldpost">{{post._user.username}} - {{post.createdAt | date:'MMM dd, yyyy'}}: {{post.text}}
-               <button class='showreplies' ng-click='showreplies = !showreplies'><span ng-if='!showreplies && post.comments.length>0'>Show Replies ({{post.comments.length}})</span><span ng-if='showreplies'>Hide Replies</span></button>
+               <button class='showreplies' ng-click='post[showreplies] = !post[showreplies]' ng-if='post.comments.length>0'><span ng-if='!post[showreplies] && post.comments.length>0'>Show Replies ({{post.comments.length}})</span><span ng-if='post[showreplies]'>Hide Replies</span></button>
                <button class="submit" ng-click="reply = !reply">Reply</button></p>
             <form id="newreply" ng-show='reply'>
                <textarea style='width:500px' ng-change="testuser()" id="comment" type="text" ng-model='comment.text'></textarea>
@@ -119,14 +132,14 @@
                <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(post,report)">
                <p class='reporttext'>Reported comments and users will be reviewed by SurfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
             </form>
-            <div id="replies" ng-repeat="comment in post.comments | orderBy:'-createdAt'" ng-show='showreplies'>
+            <div id="replies" ng-repeat="comment in post.comments | orderBy:'-createdAt'" ng-if='post[showreplies]'>
                <p>{{comment._user.username}} - {{comment.createdAt | date: 'MMM dd, yyyy'}}: {{comment.text}}</p>
                <span class='thumbs'>{{comment.thumbsup.length}}</span><a href="" ng-click='commentthumbsup(comment)'><i class="em em---1"></i></a><span class="thumbs">{{comment.thumbsdown.length}}</span><a href="" ng-click='commentthumbsdown(comment)'><i class="em em--1"></i></a>  <button class='reportcomment' ng-click='reportcomment = !reportcomment'>Report</button><br>
                <form class='report' ng-show='reportcomment'>
                   <h4>I am reporting this comment as:</h4>
                   <input class='reportfield' type='text' ng-model='report.report'>
                   <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(comment,report)">
-                  <p class='reporttext'>Reported comments and users will be reviewed by SurfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
+                  <p class='reporttext'>Reported comments and users will be reviewed by SurfingJourneys.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
                </form>
             </div>
          </div>

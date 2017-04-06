@@ -1,0 +1,125 @@
+*{
+   margin: 0px;
+   padding: 0px;
+   color: white;
+}
+#body{
+   width: 100%;
+   max-width: 1200px;
+   min-width: 960px;
+   margin: auto;
+}
+#container{
+   max-width: 1200px;
+   min-width: 960px;
+   margin: auto;
+   background-color: #296489;
+}
+#leftheader{
+   display: inline-block;
+}
+#rightheader{
+   display: inline-block;
+   float: right;
+}
+.em{
+   height: 20px;
+   margin: 0px 5px 5px 5px;
+}
+.thumbs{
+   margin-left: 10px;
+}
+#bar{
+   padding-top: 5px;
+   padding-bottom: 5px;
+   color: white;
+}
+#bar a{
+   text-decoration: none;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   padding-left: 15px;
+   padding-right: 15px;
+   color: white;
+}
+#bar a:hover{
+   color: yellow;
+}
+#header{
+   background-color: #0A384F;
+   color: white;
+   border-style: solid;
+   border-width: 1px;
+   border-color: lightgrey;
+   min-width: 960px;
+}
+.btn{
+   display: inline-block;
+   width: 93px;
+   background-color: #0A384F;
+}
+.btn:hover{
+   background-color: yellow;
+}
+.col6{
+   text-align: right;
+   margin-bottom: 10px;
+}
+   #userlink, .typelink{
+      padding: 0px;
+      color: lightblue;
+   }
+   #namelink{
+      padding: 0px;
+      color: darkblue;
+   }
+#container{
+   /*background-image: url("../images/wallpaper.jpg");*/
+   background-repeat: repeat-y;
+   padding: 1%;
+}
+#locations{
+   padding: 1%;
+   background-color: #0A384F;
+}
+   #brands{
+      margin-bottom: 2%;
+   }
+   #types{
+      margin: 1%;
+      margin-left: 2%;
+   }
+   #names{
+      margin: 1%;
+      margin-left: 2%;
+   }
+      h5{
+         margin: 0.3em;
+         margin-left: 1%;
+      }
+      p{
+         margin-top: 5px;
+         margin-bottom: 5px;
+         text-align: justify;
+      }
+      .times, .overall, .speed, .stability, .maneuverability, .paddle{
+         display: inline-block;
+      }
+      .times{
+         width: 15%;
+      }
+      .overall{
+         width: 17%;
+      }
+      .speed{
+         width: 11%;
+      }
+      .maneuverability{
+         width: 18%;
+      }
+      .stability{
+         width: 13%;
+      }
+      .paddle{
+         width: 15%;
+      }

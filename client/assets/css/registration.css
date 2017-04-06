@@ -6,15 +6,22 @@
 fieldset{
    padding: 10px;
    line-height: 25px;
-   height: 250px;
+   /*height: 430px;*/
 }
-span {
+.label{
    display: inline-block;
-   width: 140px;
+   width: 240px;
+}
+.orlabel{
+   display: inline-block;
+   width: 60px;
 }
 input{
    background-color: white;
    color: black;
+}
+#height{
+   width: 125px;
 }
 #submit{
    padding: 2px 5px;
@@ -30,6 +37,13 @@ input{
    max-width: 1200px;
    min-width: 960px;
    margin: auto;
+}
+#leftheader{
+   display: inline-block;
+}
+#rightheader{
+   display: inline-block;
+   float: right;
 }
 #bar{
    padding-top: 5px;

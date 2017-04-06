@@ -32,11 +32,37 @@ var UserSchema = new mongoose.Schema({
       maxlength: 255,
       set: encryptPassword,
    },
+   height: {
+      type: Number,
+      required: true,
+   },
+   surfingsince: {
+      type: Date,
+      required: true,
+   },
+   level: {
+      type: String,
+      required: false,
+      default: 'Not Provided',
+   },
+   fitness: {
+      type: String,
+      required: false,
+      default: 'Not Provided',
+   },
+   birthdate: {
+      type: Date,
+      required: false,
+   },
+   weight: {
+      type: Number,
+      required: true,
+   },
    resetPasswordToken: String,
    resetPasswordExpires: Date,
    posts: [{type: Schema.Types.ObjectId, ref: "Post"}],
    comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
-   trips: [{type: Schema.Types.ObjectId, ref: "Trip"}],
+   surfboards: [{type: Schema.Types.ObjectId, ref: "Surfboard"}],
 }, {timestamps: true});
 
 function encryptPassword(password){

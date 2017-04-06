@@ -1,0 +1,291 @@
+<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+<!-- ************************MAP*********************** -->
+<!DOCTYPE html>
+<meta name="viewport" content="initial-scale=1.0">
+
+<div id="container" ng-controller="postsurfboardController">
+
+   <div class="col6 offset-left2">
+         <button class="btn btn-medium font-bold"
+                socialshare
+                socialshare-provider="email"
+                socialshare-body= {{url}}
+                socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                socialshare-subject="SurfboardRatings.com"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400">
+            <i class="fa fa-envelope"></i> Email
+         </button>
+         <button class="btn btn-medium font-bold"
+               socialshare
+               socialshare-provider="facebook"
+               socialshare-type="sharer"
+               socialshare-text="Surfboard Reviews"
+               socialshare-url= "SurfboardRatings.com"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click">
+            <i class="fa fa-facebook"></i> Facebook
+         </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="twitter"
+                 socialshare-hashtags="travel, surfing, surfing travel, surfing destinations"
+                 socialshare-via="twitter"
+                 socialshare-text= {{url}}
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-twitter"></i> Twitter
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="google"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-google-plus"></i> G+
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
+                 socialshare-provider="pinterest"
+                 socialshare-text="Surfboard Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-pinterest"></i> Pinterest
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="wordpress"
+                 socialshare-text="Surfboard Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-wordpress"></i> Wordpress
+          </button>
+   </div>
+
+   <div id="newSurfboard">
+      <h3>Post a Surfboard Review <span ng-if="user">{{user.username}}</span></h3><b><span id="noUser" ng-if="!user">(Please register or log in to continue!)</span></b>
+      {{errors.title.message}}
+      <form ng-show="user">
+         <h5>Provide brand/manufacturer</h5>
+         <p><select style="width: 40%" ng-model="mySurfboard.manufacturer" ng-options="surfboard.manufacturer for surfboard in surfboards | unique:'manufacturer'">
+            <option class="dropdown" ng-disabled='true' ng-selected='true' value={{surfboard.manufacturer}}>Select a brand/manufacturer</option>
+         </select>
+         or
+         <input style="width: 40%" id="area" type="text" ng-model="mySurfboard.manufacturer2" placeholder="Enter a new brand/manufacturer"></p>
+         <h5>Provide name of surfboard</h5>
+         <p><select style="width: 40%" ng-model="mySurfboard.name" ng-options="surfboard.name for surfboard in surfboards | filter:{manufacturer:mySurfboard.manufacturer.manufacturer} | unique:'name' ">
+            <option class="dropdown" ng-disabled='true' ng-selected='true' value={{surfboard.name}}>Select a surfboard</option>
+         </select>
+         or
+         <input style="width: 40%" id="area" type="text" ng-model="mySurfboard.name2" placeholder="Enter a new surfboard"></p>
+         <h5>Provide surfboard length</h5>
+         <p><select style="width: 40%" ng-model="mySurfboard.boardlength">
+            <option value="48">4'</option>
+            <option value="49">4'1"</option>
+            <option value="50">4'2"</option>
+            <option value="51">4'3"</option>
+            <option value="52">4'4"</option>
+            <option value="53">4'5"</option>
+            <option value="54">4'6"</option>
+            <option value="55">4'7"</option>
+            <option value="56">4'8"</option>
+            <option value="57">4'9"</option>
+            <option value="58">4'10"</option>
+            <option value="59">4'11"</option>
+            <option value="60">5'</option>
+            <option value="61">5'1"</option>
+            <option value="62">5'2"</option>
+            <option value="63">5'3"</option>
+            <option value="64">5'4"</option>
+            <option value="65">5'5"</option>
+            <option value="66">5'6"</option>
+            <option value="67">5'7"</option>
+            <option value="68">5'8"</option>
+            <option value="69">5'9"</option>
+            <option value="70">5'10"</option>
+            <option value="71">5'11"</option>
+            <option value="72">6'</option>
+            <option value="73">6'1"</option>
+            <option value="74">6'2"</option>
+            <option value="75">6'3"</option>
+            <option value="76">6'4"</option>
+            <option value="77">6'5"</option>
+            <option value="78">6'6"</option>
+            <option value="79">6'7"</option>
+            <option value="80">6'8"</option>
+            <option value="81">6'9"</option>
+            <option value="82">6'10"</option>
+            <option value="83">6'11"</option>
+            <option value="84">7'</option>
+            <option value="85">7'1"</option>
+            <option value="86">7'2"</option>
+            <option value="87">7'3"</option>
+            <option value="88">7'4"</option>
+            <option value="89">7'5"</option>
+            <option value="90">7'6"</option>
+            <option value="91">7'7"</option>
+            <option value="92">7'8"</option>
+            <option value="93">7'9"</option>
+            <option value="94">7'10"</option>
+            <option value="95">7'11"</option>
+            <option value="96">8'</option>
+            <option value="97">8'1"</option>
+            <option value="98">8'2"</option>
+            <option value="99">8'3"</option>
+            <option value="100">8'4"</option>
+            <option value="101">8'5"</option>
+            <option value="102">8'6"</option>
+            <option value="103">8'7"</option>
+            <option value="104">8'8"</option>
+            <option value="105">8'9"</option>
+            <option value="106">8'10"</option>
+            <option value="107">8'11"</option>
+            <option value="108">9'</option>
+            <option value="109">9'1"</option>
+            <option value="110">9'2"</option>
+            <option value="111">9'3"</option>
+            <option value="112">9'4"</option>
+            <option value="113">9'5"</option>
+            <option value="114">9'6"</option>
+            <option value="115">9'7"</option>
+            <option value="116">9'8"</option>
+            <option value="117">9'9"</option>
+            <option value="118">9'10"</option>
+            <option value="119">9'11"</option>
+            <option value="120">10'</option>
+            <option value="121">10'1"</option>
+            <option value="122">10'2"</option>
+            <option value="123">10'3"</option>
+            <option value="124">10'4"</option>
+            <option value="125">10'5"</option>
+            <option value="126">10'6"</option>
+            <option value="127">10'7"</option>
+            <option value="128">10'8"</option>
+            <option value="129">10'9"</option>
+            <option value="130">10'10"</option>
+            <option value="131">10'11"</option>
+            <option value="132">11'</option>
+            <option value="133">11'1"</option>
+            <option value="134">11'2"</option>
+            <option value="135">11'3"</option>
+            <option value="136">11'4"</option>
+            <option value="137">11'5"</option>
+            <option value="138">11'6"</option>
+            <option value="139">11'7"</option>
+            <option value="140">11'8"</option>
+            <option value="141">11'9"</option>
+            <option value="142">11'10"</option>
+            <option value="143">11'11"</option>
+            <option value="144">12'</option>
+            <option value="145">12'1"</option>
+            <option value="146">12'2"</option>
+            <option value="147">12'3"</option>
+            <option value="148">12'4"</option>
+            <option value="149">12'5"</option>
+            <option value="150">12'6"</option>
+            <option value="151">12'7"</option>
+            <option value="152">12'8"</option>
+            <option value="153">12'9"</option>
+            <option value="154">12'10"</option>
+            <option value="155">12'11"</option>
+            <option value="156">13'</option>
+         </select>
+         <h5>Does this surfboard have stock or custom dimensions?</h5>
+         <h5><input class='radio' type='radio' ng-model='mySurfboard.customdims' value='stock'>Stock<br>
+         <input class='radio' type='radio' ng-model='mySurfboard.customdims' value='custom'>Custom<br></h5>
+         <h5>Select surfboard type</h5>
+         <p><select ng-model="mySurfboard.type">
+            <option value="Shortboard">Shortboard</option>
+            <option value="Longboard">Longboard</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Fish">Fish</option>
+            <option value="Egg">Egg/Funboard</option>
+            <option value="Gun">Gun</option>
+            <option value="SUP">SUP</option>
+         </select></p>
+         <h5>Provide a review</h5>
+         <textarea id="desc" type="text" ng-model='mySurfboard.review'></textarea>
+         <h5>Overall Rating<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.rating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Board Speed<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.speedrating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Board Maneuverability <br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.maneuverabilityrating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Board Stability<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.stabilityrating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <h5>Board Paddling<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.paddlerating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <input id="submit" type="submit" value='Submit' ng-click='newSurfboard()'>
+      </form>
+   </div>
+
+</div>

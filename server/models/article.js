@@ -20,6 +20,10 @@ var ArticleSchema = new mongoose.Schema({
       type: String,
       required: true,
    },
+   keywords:{
+      type: String,
+      required: false,
+   },
    thumbsup: [{
       type: String,
       required: false,

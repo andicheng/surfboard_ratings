@@ -36,6 +36,11 @@ app.factory('usersFactory', ['$http','$location', function($http, $location) {
          callback(res);
       })
    };
+   factory.updateuser = function(user, callback, errback){
+      $http.post('/users/updateuser/', user).then(function(res){
+         callback(res);
+      })
+   };
    factory.getUser = function(callback){
       $http.get('/currentUser').then(function(returned_data){
          callback(returned_data.data);

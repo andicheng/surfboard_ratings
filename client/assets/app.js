@@ -1,4 +1,4 @@
-var app = angular.module('myApp',['720kb.socialshare','ui.filters','angular.filter','ngRoute','ngCookies']);
+var app = angular.module('myApp',['updateMeta','720kb.socialshare','ui.filters','angular.filter','ngRoute','ngCookies']);
 
 app.factory('loginInterceptor', ['$q','$location', function($q, $location) {
    return{
@@ -32,8 +32,8 @@ app.config(function($routeProvider, $httpProvider){
       .when('/dashboard',{
          templateUrl: 'partials/dashboard.html',
       })
-      .when('/posttrip',{
-         templateUrl: 'partials/posttrip.html',
+      .when('/postsurfboard',{
+         templateUrl: 'partials/postsurfboard.html',
       })
       .when('/contact',{
          templateUrl: 'partials/contact.html',
@@ -50,26 +50,35 @@ app.config(function($routeProvider, $httpProvider){
       .when('/about',{
          templateUrl: 'partials/about.html',
       })
-      .when('/country/:id',{
-         templateUrl: 'partials/country.html',
+      .when('/type/:id',{
+         templateUrl: 'partials/type.html',
       })
-      .when('/area/:id',{
-         templateUrl: 'partials/area.html',
+      .when('/typeName/:type/:name',{
+         templateUrl: 'partials/typeName.html',
       })
-      .when('/region/:id',{
-         templateUrl: 'partials/region.html',
+      .when('/types',{
+         templateUrl: 'partials/types.html',
       })
-      .when('/regionCountry/:region/:country',{
-         templateUrl: 'partials/regionCountry.html',
+      .when('/name/:id',{
+         templateUrl: 'partials/name.html',
       })
-      .when('/trip/:id',{
-         templateUrl: 'partials/trip.html',
+      .when('/manufacturer/:id',{
+         templateUrl: 'partials/manufacturer.html',
       })
-      .when('/regions',{
-         templateUrl: 'partials/regions.html',
+      .when('/manufacturerName/:manufacturer/:name',{
+         templateUrl: 'partials/manufacturerName.html',
+      })
+      .when('/manufacturers',{
+         templateUrl: 'partials/manufacturers.html',
+      })
+      .when('/review/:id',{
+         templateUrl: 'partials/review.html',
       })
       .when('/user/:id',{
          templateUrl: 'partials/user.html',
+      })
+      .when('/updateuser',{
+         templateUrl: 'partials/updateuser.html',
       })
       .when('/articles',{
          templateUrl: 'partials/articles.html',

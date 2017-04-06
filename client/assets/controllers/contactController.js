@@ -1,7 +1,7 @@
-app.controller('contactController', ['$scope','tripsFactory', '$location','$routeParams', function($scope, tripsFactory, $location, $routeParams) {
+app.controller('contactController', ['$scope','surfboardsFactory', '$location','$routeParams', function($scope, surfboardsFactory, $location, $routeParams) {
 
    $scope.sendcontact = function(contact){
-      tripsFactory.contact($scope.contact, function(data){
+      surfboardsFactory.contact($scope.contact, function(data){
          if(data.data.errors){
             $scope.contact = {};
             alert(data.data.errors.login.message)

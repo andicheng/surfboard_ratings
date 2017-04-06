@@ -45,7 +45,7 @@
                socialshare
                socialshare-provider="facebook"
                socialshare-type="sharer"
-               socialshare-text="Surfing Destinations Reviews"
+               socialshare-text="Surfboard Reviews"
                socialshare-url= "SurfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
@@ -77,7 +77,7 @@
                  socialshare
                  socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
                  socialshare-provider="pinterest"
-                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-text="Surfboard Reviews"
                  socialshare-url= {{url}}
                  socialshare-popup-height="300"
                  socialshare-popup-width="400"
@@ -87,7 +87,7 @@
           <button class="btn btn-medium font-bold"
                  socialshare
                  socialshare-provider="wordpress"
-                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-text="Surfboard Reviews"
                  socialshare-url= {{url}}
                  socialshare-popup-height="300"
                  socialshare-popup-width="400"
@@ -106,87 +106,190 @@
          </div>
       </div>
       <div id="locations">
-         <h3>Recent Posts</h3>
-         <label><input ng-model="filter" placeholder="filter.."></label>
-         <div id="recentTrip">
-            <div id="trip" ng-animate="'animate'" ng-repeat="trip in trips | filter: filter | limitTo: 12 | orderBy: '-createdAt'">
-               <b><i><a class="regionlink" href="#/region/{{trip.region}}">{{trip.region}}</a> - <a id="arealink" href="#/country/{{trip.country}}">{{trip.country}}</a>: <a id="arealink" href="#/area/{{trip.area}}">{{trip.area}}</a></i></b>
-               <b><p><a class="regionlink" href="#/trip/{{trip._id}}">{{trip.title}}</a></p></b>
-               <p>Posted by <a id="userlink" href="#/user/{{trip._user._id}}">{{trip._user.username}}</a> on {{trip.createdAt | date:'MM/dd/yyyy'}}</p>
-                  <p>Trip Period: {{trip.tripmonth}} {{trip.tripyear}}</p>
-                  <div class="rating">
-                     Overall Rating: {{trip.rating}}
-                     <br>Surfing Conditions Rating: {{trip.surfrating}}
-                  </div>
-                  <div class="rating">
-                     Amenities Rating: {{trip.amenitiesrating}}
-                     <br>Other Activities Rating: {{trip.activitiesrating}}
-                  </div>
-               <p id="description">{{trip.description}}</p>
-               <span class='thumbs'>{{trip.thumbsup.length}}</span><a href="" ng-click='tripthumbsup(trip)'><i class="em em---1"></i></a><span class="thumbs">{{trip.thumbsdown.length}}</span><a href="" ng-click='tripthumbsdown(trip)'><i class="em em--1"></i></a> <button class='reportcomment' ng-click='reporttrip = !reporttrip'>Report</button><br>
-               <form class='report' ng-show='reporttrip'>
+         <h3>Recent Reviews</h3>
+         <label><input class='input' ng-model="filter" placeholder="filter.."></label>
+         <div id="recentSurfboard">
+            <div id="surfboard" ng-animate="'animate'" ng-repeat="surfboard in surfboards | filter: filter | limitTo: 12 | orderBy: '-createdAt'">
+               <!-- <b><i><a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - <a id="namelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: <a id="namelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a></i></b>
+               <b><p><a class="typelink" href="#/surfboard/{{surfboard._id}}">{{surfboard.title}}</a></p></b> -->
+               <p><b><a class="namelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="namelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a>- {{surfboard.customdims}} dimensions</b></p>
+               <p>Posted by <a id="userlink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MM/dd/yyyy'}}</p>
+               <div class="rating">
+                  User age: {{surfboard.user[0].age}}
+                  <br>User weight: {{surfboard.user[0].weight}}
+                  <br>User height: {{surfboard.user[0].height}}
+               </div>
+               <div class="rating">
+                  User experience level: {{surfboard.user[0].level}}
+                  <br>User fitness level: {{surfboard.user[0].fitness}}
+               </div>
+               <p>Overall Rating: {{surfboard.rating}}</p>
+               <div class="rating">
+                  Speed Rating: {{surfboard.speedrating}}
+                  <br>Maneuverability Rating: {{surfboard.maneuverabilityrating}}
+               </div>
+               <div class="rating">
+                  Stability Rating: {{surfboard.stabilityrating}}
+                  <br>Paddle Rating: {{surfboard.paddlerating}}
+               </div>
+               <p>Review: {{surfboard.review}}</p>
+               <!-- <p id="description">{{surfboard.description}}</p> -->
+               <span class='thumbs'>{{surfboard.thumbsup.length}}</span><a href="" ng-click='surfboardthumbsup(surfboard)'><i class="em em---1"></i></a><span class="thumbs">{{surfboard.thumbsdown.length}}</span><a href="" ng-click='surfboardthumbsdown(surfboard)'><i class="em em--1"></i></a> <button class='reportcomment' ng-click='reportsurfboard = !reportsurfboard'>Report</button><br>
+               <form class='report' ng-show='reportsurfboard'>
                   <h4>I am reporting this comment as:</h4>
                   <input class='reportfield' type='text' ng-model='report.report'>
-                  <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(trip,report)">
+                  <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(surfboard,report)">
                   <p class='reporttext'>Reported comments and users will be reviewed by SurfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
                </form>
             </div>
          </div>
       </div>
    </div>
-   <div id="newTrip">
-      <h3>Share Your Experiences <span ng-if="user"><a id="userlink" href="#/user/{{user._id}}">{{user.username}}</a></span></h3><b><span id="noUser" ng-if="!user">(Please register or log in to continue!)</span></b>
+   <div id="newSurfboard">
+      <h3>Post a Surfboard Review <span ng-if="user">{{user.username}}</span></h3><b><span id="noUser" ng-if="!user">(Please register or log in to continue!)</span></b>
       {{errors.title.message}}
       <form ng-show="user">
-         <h5>Select a region</h5>
-         <p><select style="width: 40%" ng-model="myTrip.region">
-            <option class="dropdown" value="North America">North America</option>
-            <option value="Central America">Central America</option>
-            <option value="South America">South America</option>
-            <option value="Caribbean">Caribbean</option>
-            <option value="Europe">Europe</option>
-            <option value="Australia / New Zealand">Australia / New Zealand</option>
-            <option value="Africa">Africa</option>
-            <option value="Central Asia">Central Asia</option>
-            <option value="South East Asia">South East Asia</option>
-            <option value="Pacific Islands">Pacific Islands</option>
-         </select></p>
-         <h5>Provide a country or territory</h5>
-         <p><select style="width: 40%" ng-model="myTrip.country" ng-options="trip.country for trip in trips | filter:{region:myTrip.region} | unique:'country'">
-            <option class="dropdown" ng-disabled='true' ng-selected='true' value={{trip.country}}>Select a country</option>
+         <h5>Provide brand/manufacturer</h5>
+         <p><select style="width: 40%" ng-model="mySurfboard.manufacturer" ng-options="surfboard.manufacturer for surfboard in surfboards | unique:'manufacturer'">
+            <option class="dropdown" ng-disabled='true' ng-selected='true' value={{surfboard.manufacturer}}>Select a brand/manufacturer</option>
          </select>
          or
-         <input style="width: 40%" id="area" type="text" ng-model="myTrip.country2" placeholder="Enter a new country"></p>
-         <h5>Provide a local area (optional)</h5>
-         <p><select style="width: 40%" ng-model="myTrip.area" ng-options="trip.area for trip in trips | filter:{region:myTrip.region} | filter:{country:myTrip.country.country}:true | unique:'area'">
-            <option class="dropdown" value="{{trip.area}}">Select an area</option>
+         <input style="width: 40%" id="name" type="text" ng-model="mySurfboard.manufacturer2" placeholder="Enter a new brand/manufacturer"></p>
+         <h5>Provide name of surfboard</h5>
+         <p><select style="width: 40%" ng-model="mySurfboard.name" ng-options="surfboard.name for surfboard in surfboards | filter:{manufacturer:mySurfboard.manufacturer.manufacturer} | unique:'name' ">
+            <option class="dropdown" ng-disabled='true' ng-selected='true' value={{surfboard.name}}>Select a surfboard</option>
          </select>
          or
-         <input style="width: 40%" id="area" type="text" ng-model="myTrip.area2" placeholder="Enter a new area"></p>
-         <p><h5>Primary Trip Month:
-            <select ng-model="myTrip.tripmonth">
-               <option value="Jan">Jan</option>
-               <option value="Feb">Feb</option>
-               <option value="Mar">Mar</option>
-               <option value="Apr">Apr</option>
-               <option value="May">May</option>
-               <option value="Jun">Jun</option>
-               <option value="Jul">Jul</option>
-               <option value="Aug">Aug</option>
-               <option value="Sep">Sep</option>
-               <option value="Oct">Oct</option>
-               <option value="Nov">Nov</option>
-               <option value="Dec">Dec</option>
-            </select>
-            Trip Year:
-            <input style="width: 20%" type="text" ng-model="myTrip.tripyear">
-         </h5></p>
-         <h5>Provide a title for your trip</h5>
-         <p><input id="title" type="text" ng-model='myTrip.title'></p>
-         <h5>Provide details of your trip</h5>
-         <pre><textarea id="desc" type="text" ng-model='myTrip.description'></textarea></pre>
-         <h5>Rate your overall experience on this trip<br>(0 worst - 10 best)</h5>
-         <p><select ng-model="myTrip.rating">
+         <input style="width: 40%" id="name" type="text" ng-model="mySurfboard.name2" placeholder="Enter a new surfboard"></p>
+         <h5>Provide surfboard length</h5>
+         <p><select style="width: 40%" ng-model="mySurfboard.boardlength">
+            <option value="48">4'</option>
+            <option value="49">4'1"</option>
+            <option value="50">4'2"</option>
+            <option value="51">4'3"</option>
+            <option value="52">4'4"</option>
+            <option value="53">4'5"</option>
+            <option value="54">4'6"</option>
+            <option value="55">4'7"</option>
+            <option value="56">4'8"</option>
+            <option value="57">4'9"</option>
+            <option value="58">4'10"</option>
+            <option value="59">4'11"</option>
+            <option value="60">5'</option>
+            <option value="61">5'1"</option>
+            <option value="62">5'2"</option>
+            <option value="63">5'3"</option>
+            <option value="64">5'4"</option>
+            <option value="65">5'5"</option>
+            <option value="66">5'6"</option>
+            <option value="67">5'7"</option>
+            <option value="68">5'8"</option>
+            <option value="69">5'9"</option>
+            <option value="70">5'10"</option>
+            <option value="71">5'11"</option>
+            <option value="72">6'</option>
+            <option value="73">6'1"</option>
+            <option value="74">6'2"</option>
+            <option value="75">6'3"</option>
+            <option value="76">6'4"</option>
+            <option value="77">6'5"</option>
+            <option value="78">6'6"</option>
+            <option value="79">6'7"</option>
+            <option value="80">6'8"</option>
+            <option value="81">6'9"</option>
+            <option value="82">6'10"</option>
+            <option value="83">6'11"</option>
+            <option value="84">7'</option>
+            <option value="85">7'1"</option>
+            <option value="86">7'2"</option>
+            <option value="87">7'3"</option>
+            <option value="88">7'4"</option>
+            <option value="89">7'5"</option>
+            <option value="90">7'6"</option>
+            <option value="91">7'7"</option>
+            <option value="92">7'8"</option>
+            <option value="93">7'9"</option>
+            <option value="94">7'10"</option>
+            <option value="95">7'11"</option>
+            <option value="96">8'</option>
+            <option value="97">8'1"</option>
+            <option value="98">8'2"</option>
+            <option value="99">8'3"</option>
+            <option value="100">8'4"</option>
+            <option value="101">8'5"</option>
+            <option value="102">8'6"</option>
+            <option value="103">8'7"</option>
+            <option value="104">8'8"</option>
+            <option value="105">8'9"</option>
+            <option value="106">8'10"</option>
+            <option value="107">8'11"</option>
+            <option value="108">9'</option>
+            <option value="109">9'1"</option>
+            <option value="110">9'2"</option>
+            <option value="111">9'3"</option>
+            <option value="112">9'4"</option>
+            <option value="113">9'5"</option>
+            <option value="114">9'6"</option>
+            <option value="115">9'7"</option>
+            <option value="116">9'8"</option>
+            <option value="117">9'9"</option>
+            <option value="118">9'10"</option>
+            <option value="119">9'11"</option>
+            <option value="120">10'</option>
+            <option value="121">10'1"</option>
+            <option value="122">10'2"</option>
+            <option value="123">10'3"</option>
+            <option value="124">10'4"</option>
+            <option value="125">10'5"</option>
+            <option value="126">10'6"</option>
+            <option value="127">10'7"</option>
+            <option value="128">10'8"</option>
+            <option value="129">10'9"</option>
+            <option value="130">10'10"</option>
+            <option value="131">10'11"</option>
+            <option value="132">11'</option>
+            <option value="133">11'1"</option>
+            <option value="134">11'2"</option>
+            <option value="135">11'3"</option>
+            <option value="136">11'4"</option>
+            <option value="137">11'5"</option>
+            <option value="138">11'6"</option>
+            <option value="139">11'7"</option>
+            <option value="140">11'8"</option>
+            <option value="141">11'9"</option>
+            <option value="142">11'10"</option>
+            <option value="143">11'11"</option>
+            <option value="144">12'</option>
+            <option value="145">12'1"</option>
+            <option value="146">12'2"</option>
+            <option value="147">12'3"</option>
+            <option value="148">12'4"</option>
+            <option value="149">12'5"</option>
+            <option value="150">12'6"</option>
+            <option value="151">12'7"</option>
+            <option value="152">12'8"</option>
+            <option value="153">12'9"</option>
+            <option value="154">12'10"</option>
+            <option value="155">12'11"</option>
+            <option value="156">13'</option>
+         </select>
+         <h5>Does this surfboard have stock or custom dimensions?</h5>
+         <h5><input class='radio' type='radio' ng-model='mySurfboard.customdims' value='stock'>Stock<br>
+         <input class='radio' type='radio' ng-model='mySurfboard.customdims' value='custom'>Custom<br></h5>
+         <h5>Select surfboard type</h5>
+         <p><select ng-model="mySurfboard.type">
+            <option value="Shortboard">Shortboard</option>
+            <option value="Longboard">Longboard</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Fish">Fish</option>
+            <option value="Egg">Egg/Funboard</option>
+            <option value="Gun">Gun</option>
+            <option value="SUP">SUP</option>
+         </select></p>
+         <h5>Provide a review</h5>
+         <textarea id="desc" type="text" ng-model='mySurfboard.review'></textarea>
+         <h5>Overall Rating<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.rating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -199,8 +302,8 @@
             <option value="9">9</option>
             <option value="10">10</option>
          </select></p>
-         <h5>Rate the surfing conditions (wave quality, crowds, etc...)<br>(0 worst - 10 best)</h5>
-         <p><select ng-model="myTrip.surfrating">
+         <h5>Board Speed<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.speedrating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -213,8 +316,8 @@
             <option value="9">9</option>
             <option value="10">10</option>
          </select></p>
-         <h5>Rate the amenities (restaurants/bars, transportation, etc...) <br>(0 worst - 10 best)</h5>
-         <p><select ng-model="myTrip.amenitiesrating">
+         <h5>Board Maneuverability <br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.maneuverabilityrating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -227,8 +330,8 @@
             <option value="9">9</option>
             <option value="10">10</option>
          </select></p>
-         <h5>Rate other activies (sightseeing, fishing, etc..)<br>(0 worst - 10 best)</h5>
-         <p><select ng-model="myTrip.activitiesrating">
+         <h5>Board Stability<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.stabilityrating">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -241,48 +344,65 @@
             <option value="9">9</option>
             <option value="10">10</option>
          </select></p>
-         <input id="submit" type="submit" value='Submit' ng-click='newTrip()'>
+         <h5>Board Paddling<br>(0 worst - 10 best)</h5>
+         <p><select ng-model="mySurfboard.paddlerating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+         </select></p>
+         <input id="submit" type="submit" value='Submit' ng-click='newSurfboard()'>
       </form>
    </div>
-   <div id="regions">
-      <img class="panoramic" src="../assets/images/panoramic1.jpg" alt="missing photo">
-      <h3 class="regionsummary">Region Summary</h3>
-      <div ng-repeat="region in regions | orderBy:'region'"><b><i><a class="regionlink" href="#/region/{{region.region}}">{{region.region}}:</a></i></b> Rated {{region.count}} Time<span ng-show="region.count>1">s</span><br>
+   <div id="types">
+      <!-- <img class="panoramic" src="../assets/images/panoramic1.jpg" alt="missing photo"> -->
+      <h3 class="typesummary">Ratings by Board Type</h3>
+      <div class='bottom' ng-repeat="type in types | orderBy:'type'"><b><i><a class="typelink" href="#/type/{{type.type}}">{{type.type}}:</a></i></b> Rated {{type.count}} Time<span ng-show="type.count>1">s</span><br>
+         Overall Rating: {{type.averageRating}}<br>
          <div class="rating">
-            Overall: {{region.averageRating}}
-            <br>Surf: {{region.averagesurfRating}}
+            Speed: {{type.averagespeedRating}}
+            <br>Maneuverability: {{type.averagemaneuverabilityRating}}
          </div>
          <div class="rating">
-            Amenities: {{region.averageamenitiesRating}}
-            <br>Activities: {{region.averageactivitiesRating}}
-         </div>
-      </div>
-   </div>
-   <div id="countries">
-      <img class="panoramic" src="../assets/images/panoramic3.jpg" alt="missing photo">
-      <h3 class="regionsummary">Best Rated Countries/Territories</h3>
-      <div ng-repeat="country in countries | orderBy:'-averageRating' | limitTo: 15"><b><i><a class="countrylink" href="#/country/{{country.country}}">{{country.country}}:</a></i></b> Rated {{country.count}} Time<span ng-show="country.count>1">s</span><br>
-         <div class="rating">
-            Overall: {{country.averageRating}}
-            <br>Surf: {{country.averagesurfRating}}
-         </div>
-         <div class="rating">
-            Amenities: {{country.averageamenitiesRating}}
-            <br>Activities: {{country.averageactivitiesRating}}
+            Stability: {{type.averagestabilityRating}}
+            <br>Paddle: {{type.averagepaddleRating}}
          </div>
       </div>
    </div>
-   <div id="areas">
-      <img class="panoramic" src="../assets/images/panoramic2.jpg" alt="missing photo">
-      <h3 class="regionsummary">Best Rated Areas</h3>
-      <div ng-repeat="area in areas | orderBy:'-averageRating' | limitTo: 20" ng-if="area.area!='Area not specified' && area.area!='No area specified'"><b><i><a class="countrylink" href="#/area/{{area.area}}">{{area.area}}:</a></i></b> Rated {{area.count}} Time<span ng-show="area.count>1">s</span><br>
+   <div id="manufacturers">
+      <h3 class="typesummary">Ratings by Brand</h3>
+      <label><input class='input' ng-model="brandfilter" placeholder="filter.."></label>
+      <div class='bottom' ng-repeat="manufacturer in manufacturers | orderBy:'-averageRating' | filter: brandfilter | limitTo: 15"><b><i><a class="manufacturerlink" href="#/manufacturer/{{manufacturer.manufacturer}}">{{manufacturer.manufacturer}}:</a></i></b> Rated {{manufacturer.count}} Time<span ng-show="manufacturer.count>1">s</span><br>
+         Overall Rating: {{manufacturer.averageRating}}<br>
          <div class="rating">
-            Overall: {{area.averageRating}}
-            <br>Surf: {{area.averagesurfRating}}
+            Speed: {{manufacturer.averagespeedRating}}
+            <br>Maneuverability: {{manufacturer.averagemaneuverabilityRating}}
          </div>
          <div class="rating">
-            Amenities: {{area.averageamenitiesRating}}
-            <br>Activities: {{area.averageactivitiesRating}}
+            Stability: {{manufacturer.averagestabilityRating}}
+            <br>Paddle: {{manufacturer.averagepaddleRating}}
+         </div>
+      </div>
+   </div>
+   <div id="names">
+      <h3 class="typesummary">Board Ratings</h3>
+      <label><input class='input' ng-model="surfboardfilter" placeholder="filter.."></label>
+      <div class='bottom' ng-repeat="name in names | orderBy:'-averageRating' | filter: surfboardfilter | limitTo: 20" ng-if="name.name!='Name not specified' && name.name!='No name specified'"><b><i><a class="manufacturerlink" href="#/name/{{name.name}}">{{name.name}}:</a></i></b> Rated {{name.count}} Time<span ng-show="name.count>1">s</span><br>
+         Overall Rating: {{name.averageRating}}<br>
+         <div class="rating">
+            Speed: {{name.averagespeedRating}}
+            <br>Maneuverability: {{name.averagemaneuverabilityRating}}
+         </div>
+         <div class="rating">
+            Stability: {{name.averagestabilityRating}}
+            <br>Paddle: {{name.averagepaddleRating}}
          </div>
       </div>
    </div>

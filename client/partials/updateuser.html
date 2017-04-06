@@ -1,0 +1,150 @@
+<link rel="stylesheet" type="text/css" href="assets/css/types.css">
+<div id="container" ng-controller="log_regController">
+   <update-title title="Surfing Journeys: Manufacturer Reviews - {{surfboards[0].manufacturer}}"></update-title>
+   <update-meta name="description" content="Surfing Journeys - Share your surf travel experiences, and learn from other users' surfboards and reviews."></update-meta>
+   <div class="col6 offset-left2">
+         <button class="btn btn-medium font-bold"
+                socialshare
+                socialshare-provider="email"
+                socialshare-body= {{url}}
+                socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                socialshare-subject="surfingJourneys.com"
+                socialshare-popup-height="300"
+                socialshare-popup-width="400">
+            <i class="fa fa-envelope"></i> Email
+         </button>
+         <button class="btn btn-medium font-bold"
+               socialshare
+               socialshare-provider="facebook"
+               socialshare-type="sharer"
+               socialshare-text="Surfing Destinations Reviews"
+               socialshare-url= "surfingJourneys.com"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click">
+            <i class="fa fa-facebook"></i> Facebook
+         </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="twitter"
+                 socialshare-hashtags="travel, surfing, surfing travel, surfing destinations"
+                 socialshare-via="twitter"
+                 socialshare-text= {{url}}
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-twitter"></i> Twitter
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="google"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-google-plus"></i> G+
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
+                 socialshare-provider="pinterest"
+                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-pinterest"></i> Pinterest
+          </button>
+          <button class="btn btn-medium font-bold"
+                 socialshare
+                 socialshare-provider="wordpress"
+                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-url= {{url}}
+                 socialshare-popup-height="300"
+                 socialshare-popup-width="400"
+                 socialshare-trigger="click">
+              <i class="fa fa-wordpress"></i> Wordpress
+          </button>
+   </div>
+   <div id="locations">
+      <h3>Edit Your Personal Information <span ng-if="user">{{user.username}}</span></h3><b><span id="noUser" ng-if="!user">(Please register or log in to continue!)</span></b>
+      <form ng-show="user">
+         <p><span class="label">First Name:</span>{{user.first_name}}</p>
+         <p><span class="label">Last Name:</span>{{user.last_name}}</p>
+         <p><span class="label">Username:</span>{{user.username}}</p>
+         <p><span class="label">email:</span>{{user.email}}</p>
+         {{errors.height.message}}
+         <p><span class="label">Height:</span>
+            <select id="height" ng-model="newUser.height">
+               <option value="48">4'</option>
+               <option value="49">4'1"</option>
+               <option value="50">4'2"</option>
+               <option value="51">4'3"</option>
+               <option value="52">4'4"</option>
+               <option value="53">4'5"</option>
+               <option value="54">4'6"</option>
+               <option value="55">4'7"</option>
+               <option value="56">4'8"</option>
+               <option value="57">4'9"</option>
+               <option value="58">4'10"</option>
+               <option value="59">4'11"</option>
+               <option value="60">5'</option>
+               <option value="61">5'1"</option>
+               <option value="62">5'2"</option>
+               <option value="63">5'3"</option>
+               <option value="64">5'4"</option>
+               <option value="65">5'5"</option>
+               <option value="66">5'6"</option>
+               <option value="67">5'7"</option>
+               <option value="68">5'8"</option>
+               <option value="69">5'9"</option>
+               <option value="70">5'10"</option>
+               <option value="71">5'11"</option>
+               <option value="72">6'</option>
+               <option value="73">6'1"</option>
+               <option value="74">6'2"</option>
+               <option value="75">6'3"</option>
+               <option value="76">6'4"</option>
+               <option value="77">6'5"</option>
+               <option value="78">6'6"</option>
+               <option value="79">6'7"</option>
+               <option value="80">6'8"</option>
+               <option value="81">6'9"</option>
+               <option value="82">6'10"</option>
+               <option value="83">6'11"</option>
+               <option value="84">7'</option>
+            </select> <span class="orlabel">(ft'in")</span> or <input type="number" ng-model='newUser.heightalt'> (cm)
+         </p>
+         {{errors.weight.message}}
+         <p><span class="label">Weight:</span><input type="number" ng-model='newUser.weight'> <span class="orlabel">(lbs)</span> or <input type="number" ng-model='newUser.weightalt'> (kgs)</p>
+         {{errors.surfingsince.message}}
+         <p><span class="label">Surfing Since (month and year):</span>{{user.surfingsince | date:'MMM dd, yyyy'}}</p>
+         {{errors.birthdate.message}}
+         <p><span class="label">Birthdate (optional):</span><input type="date" ng-model='newUser.birthdate'></p>
+         {{errors.level.message}}
+         <p><span class="label">Skill Level:</span>
+            <select id="height" ng-model="newUser.level">
+               <option value="Beginner">Beginner</option>
+               <option value="Intermediate">Intermediate</option>
+               <option value="Advanced">Advanced</option>
+               <option value="Expert">Expert</option>
+            </select>
+         </p>
+         {{errors.fitness.message}}
+         <p><span class="label">Fitness Level:</span>
+            <select id="height" ng-model="newUser.fitness">
+               <option value="Poor">Poor</option>
+               <option value="Average">Average</option>
+               <option value="Fit">Fit</option>
+               <option value="Very Fit">Very Fit</option>
+            </select>
+         </p>
+         <!-- {{errors.password.message}}
+         <p><span class="label">Password:</span><input type="password" ng-model='newUser.password'></p>
+         {{errors.confirm}}
+         <p><span class="label">Confirm Password:</span><input type="password" ng-model='newUser.confpass'></p> -->
+         <input id="submit" type="submit" value="Update" ng-click="updateuser()">
+      </form>
+   </div>
+</div>

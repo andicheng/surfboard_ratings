@@ -1,10 +1,10 @@
-app.controller('articlesController', ['$scope','usersFactory','tripsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, tripsFactory, $location, $routeParams, $route, $sce) {
+app.controller('articlesController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route, $sce) {
 
    usersFactory.getUser(function(user){
       $scope.user = user;
    });
    var getArticles = function(){
-      tripsFactory.getArticles(function(returned_data){
+      surfboardsFactory.getArticles(function(returned_data){
          if(returned_data.data.errors){
             // $scope.errors = data.data.errors;
             alert(returned_data.data.errors);
@@ -15,7 +15,7 @@ app.controller('articlesController', ['$scope','usersFactory','tripsFactory', '$
    }
    getArticles();
    $scope.newArticle = function(){
-      tripsFactory.newArticle($scope.article, function(data){
+      surfboardsFactory.newArticle($scope.article, function(data){
          if(data.data.errors){
             console.log('error saving article')
          }else{
@@ -31,7 +31,7 @@ app.controller('articlesController', ['$scope','usersFactory','tripsFactory', '$
       $location.url('/login')
    }
    $scope.newPost = function(id, post){
-      tripsFactory.newPost(id, post, function(data){
+      surfboardsFactory.newPost(id, post, function(data){
          console.log(id, post)
          console.log(data)
          if(data.data.errors){
@@ -39,25 +39,25 @@ app.controller('articlesController', ['$scope','usersFactory','tripsFactory', '$
             alert(data.data.message);
          }else{
             $scope.post = {};
-            getAreaTrips();
+            getAreaSurfboards();
          }
       })
    }
    $scope.newComment = function(id, comment){
-      tripsFactory.newComment(id, comment, function(data){
+      surfboardsFactory.newComment(id, comment, function(data){
          console.log(id, comment)
          if(data.data.errors){
             // $scope.errors = data.data.errors;
             alert(data.data.message);
          }else{
             $scope.comment = {};
-            getAreaTrips();
+            getAreaSurfboards();
          }
       })
    }
    $scope.reportcomments = function(comment, report){
       var req = Object.assign({}, comment, report);
-      tripsFactory.reportcomments(req, function(data){
+      surfboardsFactory.reportcomments(req, function(data){
          if(data.data.errors){
             $scope.report = {};
             $scope.errors = data.data.errors;
@@ -77,86 +77,86 @@ app.controller('articlesController', ['$scope','usersFactory','tripsFactory', '$
          console.log('Clicked')
       }
    }
-   $scope.tripthumbsup = function(trip){
-      tripsFactory.tripthumbsup(trip, function(data){
+   $scope.surfboardthumbsup = function(surfboard){
+      surfboardsFactory.surfboardthumbsup(surfboard, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully liked');
-            getAreaTrips();
+            getAreaSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
-   $scope.tripthumbsdown = function(trip){
-      tripsFactory.tripthumbsdown(trip, function(data){
+   $scope.surfboardthumbsdown = function(surfboard){
+      surfboardsFactory.surfboardthumbsdown(surfboard, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully unliked');
-            getAreaTrips();
+            getAreaSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
    $scope.postthumbsup = function(post){
-      tripsFactory.postthumbsup(post, function(data){
+      surfboardsFactory.postthumbsup(post, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully liked');
-            getAreaTrips();
+            getAreaSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
    $scope.postthumbsdown = function(post){
-      tripsFactory.postthumbsdown(post, function(data){
+      surfboardsFactory.postthumbsdown(post, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully unliked');
-            getAreaTrips();
+            getAreaSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
    $scope.commentthumbsup = function(comment){
-      tripsFactory.commentthumbsup(comment, function(data){
+      surfboardsFactory.commentthumbsup(comment, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully liked');
-            getAreaTrips();
+            getAreaSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
    $scope.commentthumbsdown = function(comment){
-      tripsFactory.commentthumbsdown(comment, function(data){
+      surfboardsFactory.commentthumbsdown(comment, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully unliked');
-            getAreaTrips();
+            getAreaSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
    $scope.reply = false;
-   $scope.reporttrip = false;
+   $scope.reportsurfboard = false;
    $scope.reportpost = false;
    $scope.reportcomment = false;
    $scope.article = {

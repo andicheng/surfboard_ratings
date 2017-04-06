@@ -18,7 +18,7 @@
                socialshare
                socialshare-provider="facebook"
                socialshare-type="sharer"
-               socialshare-text="Surfing Destinations Reviews"
+               socialshare-text="Surfboard Reviews"
                socialshare-url= "SurfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
@@ -50,7 +50,7 @@
                  socialshare
                  socialshare-media="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTWGNvatNjOUyli3tBacDdAHmienfptFVStj_olGCWmaUXoIGYI"
                  socialshare-provider="pinterest"
-                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-text="Surfboard Reviews"
                  socialshare-url= {{url}}
                  socialshare-popup-height="300"
                  socialshare-popup-width="400"
@@ -60,7 +60,7 @@
           <button class="btn btn-medium font-bold"
                  socialshare
                  socialshare-provider="wordpress"
-                 socialshare-text="Surfing Destinations Reviews"
+                 socialshare-text="Surfboard Reviews"
                  socialshare-url= {{url}}
                  socialshare-popup-height="300"
                  socialshare-popup-width="400"
@@ -74,7 +74,7 @@
       <p ng-bind-html='text'></p>
       <br>
       <p>Author: {{article.author}}</p>
-      <span class='thumbs'>{{article.thumbsup.length}}</span><a href="" ng-click='articlethumbsup(article)'><i class="em em---1"></i></a><span class="thumbs">{{article.thumbsdown.length}}</span><a href="" ng-click='articlethumbsdown(trip)'><i class="em em--1"></i></a>
+      <span class='thumbs'>{{article.thumbsup.length}}</span><a href="" ng-click='articlethumbsup(article)'><i class="em em---1"></i></a><span class="thumbs">{{article.thumbsdown.length}}</span><a href="" ng-click='articlethumbsdown(surfboard)'><i class="em em--1"></i></a>
       <br>
       <h4 class='commentsHeading'>Comments:</h4>
       <form id="newcomment">
@@ -83,7 +83,7 @@
       </form>
       <div id="posts" ng-repeat="post in article.posts | orderBy:'-createdAt'">
          <p id="oldpost">{{post._user.username}} - {{post.createdAt | date:'MMM dd, yyyy'}}: {{post.text}}
-            <button class='showreplies' ng-click='showreplies = !showreplies'><span ng-if='!showreplies && post.comments.length>0'>Show Replies ({{post.comments.length}})</span><span ng-if='showreplies'>Hide Replies</span></button>
+            <button class='showreplies' ng-click='showreplies = !showreplies' ng-if='post.comments.length>0'><span ng-if='!showreplies && post.comments.length>0'>Show Replies ({{post.comments.length}})</span><span ng-if='showreplies'>Hide Replies</span></button>
             <button class="submit" ng-click="reply = !reply">Reply</button></p>
          <form id="newreply" ng-show='reply'>
             <textarea style='width:500px' ng-change="testuser()" id="comment" type="text" ng-model='comment.text'></textarea>

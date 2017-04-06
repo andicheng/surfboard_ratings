@@ -1,10 +1,10 @@
-app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, tripsFactory, $location, $routeParams, $route, $sce) {
+app.controller('articleController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route, $sce) {
 
    usersFactory.getUser(function(user){
       $scope.user = user;
    });
    var getArticle = function(){
-      tripsFactory.getArticle($routeParams.id, function(data){
+      surfboardsFactory.getArticle($routeParams.id, function(data){
          if(data.data.errors){
             console.log('error getting article')
          }else{
@@ -15,7 +15,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
    };
    getArticle();
    $scope.newArticle = function(){
-      tripsFactory.newArticle($scope.article, function(data){
+      surfboardsFactory.newArticle($scope.article, function(data){
          if(data.data.errors){
             console.log('error saving article')
          }else{
@@ -31,7 +31,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       $location.url('/login')
    }
    $scope.newArticlePost = function(id, post){
-      tripsFactory.newArticlePost(id, post, function(data){
+      surfboardsFactory.newArticlePost(id, post, function(data){
          console.log(id, post)
          console.log(data)
          if(data.data.errors){
@@ -44,7 +44,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.newArticleComment = function(id, comment){
-      tripsFactory.newArticleComment(id, comment, function(data){
+      surfboardsFactory.newArticleComment(id, comment, function(data){
          console.log(id, comment)
          if(data.data.errors){
             // $scope.errors = data.data.errors;
@@ -57,7 +57,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
    }
    $scope.reportcomments = function(comment, report){
       var req = Object.assign({}, comment, report);
-      tripsFactory.reportcomments(req, function(data){
+      surfboardsFactory.reportcomments(req, function(data){
          if(data.data.errors){
             $scope.report = {};
             $scope.errors = data.data.errors;
@@ -78,7 +78,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       }
    }
    $scope.articlethumbsup = function(article){
-      tripsFactory.articlethumbsup(article, function(data){
+      surfboardsFactory.articlethumbsup(article, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
@@ -91,7 +91,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.articlethumbsdown = function(article){
-      tripsFactory.articlethumbsdown(article, function(data){
+      surfboardsFactory.articlethumbsdown(article, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
@@ -104,7 +104,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.articlepostthumbsup = function(post){
-      tripsFactory.articlepostthumbsup(post, function(data){
+      surfboardsFactory.articlepostthumbsup(post, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
@@ -117,7 +117,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.articlepostthumbsdown = function(post){
-      tripsFactory.articlepostthumbsdown(post, function(data){
+      surfboardsFactory.articlepostthumbsdown(post, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
@@ -130,7 +130,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.articlecommentthumbsup = function(comment){
-      tripsFactory.articlecommentthumbsup(comment, function(data){
+      surfboardsFactory.articlecommentthumbsup(comment, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
@@ -143,7 +143,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.articlecommentthumbsdown = function(comment){
-      tripsFactory.articlecommentthumbsdown(comment, function(data){
+      surfboardsFactory.articlecommentthumbsdown(comment, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
@@ -156,7 +156,7 @@ app.controller('articleController', ['$scope','usersFactory','tripsFactory', '$l
       })
    }
    $scope.reply = false;
-   $scope.reporttrip = false;
+   $scope.reportsurfboard = false;
    $scope.reportpost = false;
    $scope.reportcomment = false;
    $scope.showreplies = false;

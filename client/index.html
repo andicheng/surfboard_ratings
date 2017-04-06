@@ -4,6 +4,8 @@
       <!DOCTYPE html>
       <meta charset="utf-8">
       <title>Surfboard Ratings</title>
+      <meta name="description" content="Surfboard Ratings - Share your experiences and reviews of your surfboards, and learn from other users' reviews.">
+      <meta name="keywords" content="Surfboard, surfboard Reviews, shortboard, longboard, surfboard ratings, surfing, surf">
       <meta name="viewport" content="initial-scale=1.0">
       <link rel="stylesheet" type="text/css"
          href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -11,33 +13,39 @@
       <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
       <script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-update-meta/dist/update-meta.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
       <script src="assets/app.js" charset="utf-8"></script>
       <script src="assets/factories/usersFactory.js" charset="utf-8"></script>
-      <script src="assets/factories/tripsFactory.js" charset="utf-8"></script>
+      <script src="assets/factories/surfboardsFactory.js" charset="utf-8"></script>
       <script src="assets/controllers/log_regController.js" charset="utf-8"></script>
       <script src="assets/controllers/dashboardController.js" charset="utf-8"></script>
-      <script src="assets/controllers/areaController.js" charset="utf-8"></script>
-      <script src="assets/controllers/countryController.js" charset="utf-8"></script>
-      <script src="assets/controllers/regionController.js" charset="utf-8"></script>
-      <script src="assets/controllers/regionCountryController.js" charset="utf-8"></script>
-      <script src="assets/controllers/regionsController.js" charset="utf-8"></script>
       <script src="assets/controllers/userController.js" charset="utf-8"></script>
+      <script src="assets/controllers/manufacturerController.js" charset="utf-8"></script>
+      <script src="assets/controllers/manufacturerNameController.js" charset="utf-8"></script>
+      <script src="assets/controllers/manufacturersController.js" charset="utf-8"></script>
+      <script src="assets/controllers/typesController.js" charset="utf-8"></script>
+      <script src="assets/controllers/typeController.js" charset="utf-8"></script>
       <script src="assets/controllers/contactController.js" charset="utf-8"></script>
-      <script src="assets/controllers/tripController.js" charset="utf-8"></script>
-      <script src="assets/controllers/posttripController.js" charset="utf-8"></script>
+      <script src="assets/controllers/nameController.js" charset="utf-8"></script>
+      <script src="assets/controllers/postsurfboardController.js" charset="utf-8"></script>
       <script src="assets/controllers/articleController.js" charset="utf-8"></script>
       <script src="assets/controllers/articlesController.js" charset="utf-8"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
       <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-      <link rel="shortcut icon" href="">
+      <link rel="shortcut icon" href="#">
       <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
       <!-- <script src="http://code.angularjs.org/1.1.5/angular.js"></script> -->
    </head>
    <body>
       <div id='body' ng-controller="dashboardController">
          <div id="header">
-            <p id="bar"><a href="#/dashboard">Home</a> | <a href="#/regions">Regions/Countries</a> | <a href="#/posttrip">Post a Trip</a> | <a href="#/articles">Articles</a> | <a href="#/register">Register</a> | <a href="#/login">Login</a> | <a href='' ng-click="logout()">Log Out</a></p>
+            <div id='leftheader'>
+               <p id="bar"><a href="#/dashboard">Home</a> | <a href="#/postsurfboard">Post a Review</a> | <a href="#/types">Board Types</a> | <a href="#/manufacturers">Brands</a> | <a href="#/articles">Articles</a> | <a href="#/updateuser">Update User</a> </p>
+            </div>
+            <div id='rightheader'>
+               <p id='bar'><a href="#/register">Register</a> | <a href="#/login">Login</a> | <a href='' ng-click="logout()">Log Out</a></p>
+            </div>
          </div>
          <div ng-view=""></div>
          <div style="color:black" id="footer">

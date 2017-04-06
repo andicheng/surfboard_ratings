@@ -153,10 +153,10 @@ module.exports = {
                      article.thumbsup.push(user._id)
                      article.save(function(err){
                         if(err){
-                           console.log('article tripthumbsup load error')
+                           console.log('article surfboardthumbsup load error')
                            return res.sendStatus('500');
                         }else{
-                           console.log('successfully added an article tripthumbsup');
+                           console.log('successfully added an article surfboardthumbsup');
                            res.json(article);
                            req.session.user = user;
                         }
@@ -188,10 +188,10 @@ module.exports = {
                      article.thumbsdown.push(user._id)
                      article.save(function(err){
                         if(err){
-                           console.log('article tripthumbsdown load error')
+                           console.log('article surfboardthumbsdown load error')
                            return res.sendStatus('500');
                         }else{
-                           console.log('successfully added an article tripthumbsdown');
+                           console.log('successfully added an article surfboardthumbsdown');
                            res.json(article);
                            req.session.user = user;
                         }

@@ -1,91 +1,108 @@
-app.controller('dashboardController', ['$scope','usersFactory','tripsFactory', '$location','$routeParams', '$route', function($scope, usersFactory, tripsFactory,$location, $routeParams, $route) {
+app.controller('dashboardController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', function($scope, usersFactory, surfboardsFactory,$location, $routeParams, $route) {
 
    usersFactory.getUser(function(user){
       $scope.user = user;
    });
-   var getTrips = function(){
-   tripsFactory.getTrips(function(returned_data){
-      $scope.trips = returned_data;
-      var regions=[];
-      for(var i=0; i<$scope.trips.length; i++){
+   var getSurfboards = function(){
+   surfboardsFactory.getSurfboards(function(returned_data){
+      $scope.surfboards = returned_data;
+      console.log(returned_data);
+      $scope.url = $location.absUrl();
+      for(var i=0; i<$scope.surfboards.length; i++){
+         $scope.surfboards[i].boardlength = Math.floor($scope.surfboards[i].boardlength/12)+"'"+($scope.surfboards[i].boardlength%12)+'"'
+         $scope.surfboards[i].user[0].weight = $scope.surfboards[i].user[0].weight+" lbs or "+Math.round($scope.surfboards[i].user[0].weight/2.20462*10)/10+" kgs"
+         $scope.surfboards[i].user[0].height = Math.floor($scope.surfboards[i].user[0].height/12)+"'"+($scope.surfboards[i].user[0].height%12)+'" or '+Math.round($scope.surfboards[i].user[0].height*2.54)+" cm"
+         if(!$scope.surfboards[i].user[0].birthdate){
+            $scope.surfboards[i].user[0].age = "Not Provided"
+         }else{
+         $scope.surfboards[i].user[0].age = Math.ceil(Math.abs(new Date() - new Date($scope.surfboards[i].user[0].birthdate))/(1000 * 3600 * 24 * 365));
+         }
+      }
+      var types=[];
+      for(var i=0; i<$scope.surfboards.length; i++){
          var sum=0;
-         var sumsurfrating=0;
-         var sumamenitiesrating=0;
-         var sumactivitiesrating=0;
+         var sumspeedrating=0;
+         var summaneuverabilityrating=0;
+         var sumstabilityrating=0;
+         var sumpaddlerating=0;
          var count=0;
-         var region = $scope.trips[i].region;
-         for(var j=i; j<$scope.trips.length; j++){
-            if($scope.trips[j].region == region){
-               sum+=$scope.trips[j].rating;
-               sumsurfrating+=$scope.trips[j].surfrating;
-               sumamenitiesrating+=$scope.trips[j].amenitiesrating;
-               sumactivitiesrating+=$scope.trips[j].activitiesrating;
+         var type = $scope.surfboards[i].type;
+         for(var j=i; j<$scope.surfboards.length; j++){
+            if($scope.surfboards[j].type == type){
+               sum+=$scope.surfboards[j].rating;
+               sumspeedrating+=$scope.surfboards[j].speedrating;
+               summaneuverabilityrating+=$scope.surfboards[j].maneuverabilityrating;
+               sumstabilityrating+=$scope.surfboards[j].stabilityrating;
+               sumpaddlerating+=$scope.surfboards[j].paddlerating;
                count++
             }
          }
-         var found = regions.some(function (el) {
-            return el.region == region;
+         var found = types.some(function (el) {
+            return el.type == type;
          });
          if (!found) {
-            regions.push({region: region, count: count, averageRating: Math.round(sum/count*10)/10,averageactivitiesRating: Math.round(sumactivitiesrating/count*10)/10,averagesurfRating: Math.round(sumsurfrating/count*10)/10,averageamenitiesRating: Math.round(sumamenitiesrating/count*10)/10})
+            types.push({type: type, count: count, averageRating: Math.round(sum/count*10)/10,averagespeedRating: Math.round(sumspeedrating/count*10)/10,averagemaneuverabilityRating: Math.round(summaneuverabilityrating/count*10)/10,averagestabilityRating: Math.round(sumstabilityrating/count*10)/10,averagepaddleRating: Math.round(sumpaddlerating/count*10)/10})
          }
       }
-      var countries=[];
-      for(var i=0; i<$scope.trips.length; i++){
+      var manufacturers=[];
+      for(var i=0; i<$scope.surfboards.length; i++){
          var sum2=0;
-         var sum2surfrating=0;
-         var sum2amenitiesrating=0;
-         var sum2activitiesrating=0;
+         var sum2speedrating=0;
+         var sum2maneuverabilityrating=0;
+         var sum2stabilityrating=0;
+         var sum2paddlerating=0;
          var count2=0;
-         var country = $scope.trips[i].country;
-         for(var j=i; j<$scope.trips.length; j++){
-            if($scope.trips[j].country == country){
-               sum2+=$scope.trips[j].rating;
-               sum2surfrating+=$scope.trips[j].surfrating;
-               sum2amenitiesrating+=$scope.trips[j].amenitiesrating;
-               sum2activitiesrating+=$scope.trips[j].activitiesrating;
+         var manufacturer = $scope.surfboards[i].manufacturer;
+         for(var j=i; j<$scope.surfboards.length; j++){
+            if($scope.surfboards[j].manufacturer == manufacturer){
+               sum2+=$scope.surfboards[j].rating;
+               sum2speedrating+=$scope.surfboards[j].speedrating;
+               sum2maneuverabilityrating+=$scope.surfboards[j].maneuverabilityrating;
+               sum2stabilityrating+=$scope.surfboards[j].stabilityrating;
+               sum2paddlerating+=$scope.surfboards[j].paddlerating;
                count2++;
             }
          }
-         var found = countries.some(function (el) {
-            return el.country == country;
+         var found = manufacturers.some(function (el) {
+            return el.manufacturer == manufacturer;
          });
          if (!found) {
-            countries.push({country: country, count: count2, averageRating: Math.round(sum2/count2*10)/10,averageactivitiesRating: Math.round(sum2activitiesrating/count2*10)/10,averagesurfRating: Math.round(sum2surfrating/count2*10)/10,averageamenitiesRating: Math.round(sum2amenitiesrating/count2*10)/10})
+            manufacturers.push({manufacturer: manufacturer, count: count2, averageRating: Math.round(sum2/count2*10)/10,averagespeedRating: Math.round(sum2speedrating/count2*10)/10,averagemaneuverabilityRating: Math.round(sum2maneuverabilityrating/count2*10)/10,averagestabilityRating: Math.round(sum2stabilityrating/count2*10)/10,averagepaddleRating: Math.round(sum2paddlerating/count2*10)/10})
          }
       }
-      var areas=[];
-      for(var i=0; i<$scope.trips.length; i++){
+      var names=[];
+      for(var i=0; i<$scope.surfboards.length; i++){
          var sum3=0;
-         var sum3surfrating=0;
-         var sum3amenitiesrating=0;
-         var sum3activitiesrating=0;
+         var sum3speedrating=0;
+         var sum3maneuverabilityrating=0;
+         var sum3stabilityrating=0;
+         var sum3paddlerating=0;
          var count3=0;
-         var area = $scope.trips[i].area;
-         for(var j=i; j<$scope.trips.length; j++){
-            if($scope.trips[j].area == area){
-               sum3+=$scope.trips[j].rating;
-               sum3surfrating+=$scope.trips[j].surfrating;
-               sum3amenitiesrating+=$scope.trips[j].amenitiesrating;
-               sum3activitiesrating+=$scope.trips[j].activitiesrating;
+         var name = $scope.surfboards[i].name;
+         for(var j=i; j<$scope.surfboards.length; j++){
+            if($scope.surfboards[j].name == name){
+               sum3+=$scope.surfboards[j].rating;
+               sum3speedrating+=$scope.surfboards[j].speedrating;
+               sum3maneuverabilityrating+=$scope.surfboards[j].maneuverabilityrating;
+               sum3stabilityrating+=$scope.surfboards[j].stabilityrating;
+               sum3paddlerating+=$scope.surfboards[j].paddlerating;
                count3++;
             }
          }
-         var found = areas.some(function (el) {
-            return el.area == area;
+         var found = names.some(function (el) {
+            return el.name == name;
          });
          if (!found) {
-            areas.push({area: area, count: count3, averageRating: Math.round(sum3/count3*10)/10,averageactivitiesRating: Math.round(sum3activitiesrating/count3*10)/10,averagesurfRating: Math.round(sum3surfrating/count3*10)/10,averageamenitiesRating: Math.round(sum3amenitiesrating/count3*10)/10})
+            names.push({name: name, count: count3, averageRating: Math.round(sum3/count3*10)/10,averagespeedRating: Math.round(sum3speedrating/count3*10)/10,averagemaneuverabilityRating: Math.round(sum3maneuverabilityrating/count3*10)/10,averagestabilityRating: Math.round(sum3stabilityrating/count3*10)/10,averagepaddleRating: Math.round(sum3paddlerating/count3*10)/10})
          }
       }
-      $scope.areas = areas;
-      $scope.countries = countries;
-      $scope.regions = regions;
-      $scope.url = $location.absUrl();
+      $scope.names = names;
+      $scope.manufacturers = manufacturers;
+      $scope.types = types;
    })};
-   getTrips();
+   getSurfboards();
    var getArticles = function(){
-      tripsFactory.getArticles(function(returned_data){
+      surfboardsFactory.getArticles(function(returned_data){
          if(returned_data.data.errors){
             // $scope.errors = data.data.errors;
             alert(returned_data.data.errors);
@@ -101,27 +118,40 @@ app.controller('dashboardController', ['$scope','usersFactory','tripsFactory', '
       });
       $location.url('/login')
    }
-   $scope.newTrip = function(){
-      var day = '01';
-      var month = $scope.myTrip.tripmonth;
-      var year = $scope.myTrip.tripyear;
-      var date = day+' '+month+' '+year;
-      var mydate = new Date(date);
-      if(mydate <= new Date()){
-         tripsFactory.newTrip($scope.myTrip, function(data){
-            console.log($scope.myTrip);
-            if(data.data.errors){
-               alert(data.data.errors.message);
-            }else{
-               $scope.myTrip = {};
-               var id = data.data._user;
-               console.log(data);
-               $location.path('/user/'+id)
-            }
-         })
-      }else{
-         alert('Trip date cannot be in the future')
-      }
+   // $scope.newSurfboard = function(){
+   //    var day = '01';
+   //    var month = $scope.mySurfboard.surfboardmonth;
+   //    var year = $scope.mySurfboard.surfboardyear;
+   //    var date = day+' '+month+' '+year;
+   //    var mydate = new Date(date);
+   //    if(mydate <= new Date()){
+   //       surfboardsFactory.newSurfboard($scope.mySurfboard, function(data){
+   //          console.log($scope.mySurfboard);
+   //          if(data.data.errors){
+   //             alert(data.data.errors.message);
+   //          }else{
+   //             $scope.mySurfboard = {};
+   //             var id = data.data._user;
+   //             console.log(data);
+   //             $location.path('/user/'+id)
+   //          }
+   //       })
+   //    }else{
+   //       alert('Surfboard date cannot be in the future')
+   //    }
+   // }
+   $scope.newSurfboard = function(){
+      console.log($scope.mySurfboard)
+      surfboardsFactory.newSurfboard($scope.mySurfboard, function(data){
+         console.log(data);
+         if(data.data.errors){
+            alert(data.data.errors.message);
+         }else{
+            $scope.mySurfboard = {};
+            var id = data.data.user[0]._id;
+            $location.path('/user/'+id)
+         }
+      })
    }
    $scope.show = function(){
       usersFactory.show($routeParams.user, function(data){
@@ -130,7 +160,7 @@ app.controller('dashboardController', ['$scope','usersFactory','tripsFactory', '
    }
    $scope.reportcomments = function(comment, report){
       var req = Object.assign({}, comment, report);
-      tripsFactory.reportcomments(req, function(data){
+      surfboardsFactory.reportcomments(req, function(data){
          if(data.data.errors){
             $scope.report = {};
             $scope.errors = data.data.errors;
@@ -143,31 +173,31 @@ app.controller('dashboardController', ['$scope','usersFactory','tripsFactory', '
          console.log("Please try again later.", err);
       })
    }
-   $scope.tripthumbsup = function(trip){
-      tripsFactory.tripthumbsup(trip, function(data){
+   $scope.surfboardthumbsup = function(surfboard){
+      surfboardsFactory.surfboardthumbsup(surfboard, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully liked');
-            getTrips();
+            getSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
-   $scope.tripthumbsdown = function(trip){
-      tripsFactory.tripthumbsdown(trip, function(data){
+   $scope.surfboardthumbsdown = function(surfboard){
+      surfboardsFactory.surfboardthumbsdown(surfboard, function(data){
          if(data.data.errors){
             alert(data.data.errors.message);
             $route.reload();
          }else{
             console.log('successfully unliked');
-            getTrips();
+            getSurfboards();
          }
       }, function(err){
          console.log("Please try again later.", err);
       })
    }
-   $scope.reporttrip = false;
+   $scope.reportsurfboard = false;
 }]);

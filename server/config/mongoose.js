@@ -20,17 +20,17 @@ path          = require('path'),
 /*
 *  database information
 */
-    surf_travel   = 'mongodb://localhost/surf_travel';
+    surfboard_ratings   = 'mongodb://localhost/surfboard_ratings';
 /*
 * Connect to the database
 */
-mongoose.connect(surf_travel);
+mongoose.connect(surfboard_ratings);
 /*
 *  CONNECTION EVENTS
 *  When successfully connected
 */
 mongoose.connection.on( 'connected', function () {
-  console.log( `Mongoose default connection open to ${ surf_travel }` );
+  console.log( `Mongoose default connection open to ${ surfboard_ratings }` );
 });
 /*
 *  If the connection throws an error

@@ -3,6 +3,9 @@
    padding: 0px;
    color: black;
 }
+.input, textarea{
+   color: black;
+}
 #body{
    width: 100%;
    max-width: 1200px;
@@ -13,6 +16,14 @@
    max-width: 1200px;
    min-width: 960px;
    margin: auto;
+   background-color: #296489;
+}
+#leftheader{
+   display: inline-block;
+}
+#rightheader{
+   display: inline-block;
+   float: right;
 }
 .em{
    height: 20px;
@@ -25,7 +36,10 @@
    padding-top: 5px;
    padding-bottom: 5px;
    color: white;
-   min-width: 960px;
+   /*min-width: 960px;*/
+   margin-top: 5px;
+   margin-bottom: 5px;
+   text-align: justify;
 }
 #bar a{
    text-decoration: none;
@@ -63,7 +77,6 @@
    }
 #container{
    padding: 1%;
-   background-image: url("../images/wallpaper.jpg");
    background-repeat: repeat-y;
 }
 .commentsHeading{
@@ -265,4 +278,7 @@ label{
    }
    img{
       margin: 10px 20px;
+   }
+   button.showreplies span{
+      color: black;
    }

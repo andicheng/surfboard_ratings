@@ -1,531 +1,252 @@
-Angular Socialshare
-==================
+Angular Social Share
+=========
 
-![Angular socialshare](http://i.imgur.com/bEpeJk7.png)
+Angular Social Share is a collection of directives which lets you easily share your links various social networks. Currently Facebok, Google, Twitter and Linkdin are supported. Social Networks get the Meta data of the shared content like Title, Summary and Image from the Meta tags on the page by scraping. But Single Page Apps like Angular are unable to support crawling. But these dirictives use alternative so that Meta data is displayed where it is possible. 
+Checkout the [Demo].
+Change Log
+----
+As of Verstion 1 This directive supports two way binding of data, so now you can populate the data in the directive from a HTTP request.
 
-[![Join the chat at https://gitter.im/720kb/angular-socialshare](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/720kb/angular-socialshare?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Future Plans
+----
+Support asyncronous loading of corresponding social plugin javascript assets.
+
+Getting Started
+-----
+Install the library through bower.
+```js
+bower install angular-socialshare
+```
+Include the script (and optional css file) in your html file.
+```html
+<link rel='stylesheet' href="bower_components/angular-socialshare/angular-socialshare.min.css">
+<script src="bower_components/angular-socialshare/angular-socialshare.min.js"></script>
+```
+
+Add to your APP's dependency.
+```js
+angular.module('testing',['djds4rce.angular-socialshare'])
+```
+IMPORTANT
+----
+For Correct Sharing of links and updating share count you must enable HTML5 Mode True for your application. i.e No `#` in URL'S .
+```js
+angular.module('testing').config(function($locationProvider){
+    $locationProvider.html5Mode(true).hashPrefix('!');
+});
+```
+HTML5 Mode requires server configration [Explained Here] 
 
 
-Angular Socialshare is an angularjs directive for sharing urls and content on social networks such as (facebook, google+, twitter, pinterest and so on).
+Share on Facebook
+----
+Facebook share uses facebook API which requires us to provide a APPID. Register a facebook app and Configure the APPID in your appplication. Note that you will get an error regarding 'not permitted URL' if you are testing this button in a localhost environment.
 
+```js
+angular.module('testing').run(function($FB){
+  $FB.init('YOUR_APPID');
+});
+```
+Use the Facebook Directive
+```html
+ <a facebook class="facebookShare" data-url='http://google.com' data-shares='shares'>{{ shares }}</a>
+```
+As we are using Facebook share API and not the facebook share button, you will have to style your own Facebook button, or use the provided stylesheet that has styles for the horizontal count button. You also need to display the share count, which the directive fetches from a diffrent API. The directive has transclusion set to true. The latest Facebook share API only allows for a URL to be supplied, it will scrape the other data (image, title, description) from the supplied URL.
 
-The Angular Socialshare is developed by [720kb](http://720kb.net).
+The Attributes for the directives are
+```js
+/*
+data-url: URL of the Shared Content
+data-shares: The Scope variable on which share count will be binded to. This lets you put
+multiple share buttons on a single page and bind the share count to the respective model object.
+data-callback: The Scope function which will receive [FB's Response object](https://developers.facebook.com/docs/javascript/reference/FB.ui)
+*/
+```
 
-####Requirements
-
-
-AngularJS v1.3+
-
-####Browser support
-
-
-![Chrome](https://raw.github.com/alrra/browser-logos/master/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/firefox/firefox_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/internet-explorer/internet-explorer_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/safari/safari_48x48.png)
---- | --- | --- | --- | --- |
- ✔ | ✔ | IE9 + | ✔ | ✔ |
-
-
-## Load
-
-To use the directive, include the angular socialshare's javascript file in your web page:
+####Share via Feed Dialog
+The feed dialog works in the same way as the normal share dialog, but also has some addittional attributes available
 
 ```html
-<!DOCTYPE HTML>
-<html>
-<body ng-app="app">
-  //.....
-  <script src="src/js/angular-socialshare.js"></script>
-</body>
-</html>
+ <a facebook-feed-share class="facebookShare" data-url='http://google.com' data-shares='shares', data-description="Example text">{{ shares }}</a>
 ```
 
-##Installation
-
-####Bower
-
-```bash
-$ bower install angularjs-socialshare --save
-```
-####Npm
-
-```bash
-$ npm install angular-socialshare --save
-```
-
-_then [load](https://github.com/720kb/angular-socialshare#load) it in your html_
-
-####Add module dependency
-Add the 720kb.socialshare module dependency
-
-```javascript
-angular.module('app', [
-  '720kb.socialshare'
- ]);
+```js
+/*
+data-url: URL of the Shared Content
+data-shares: The Scope variable on which share count will be binded to. This lets you put
+multiple share buttons on a single page and bind the share count to the respective model object.
+data-picture: The URL of a picture attached to the share. The picture must be at least 200px by 200px.
+data-source: The URL of a media file (either SWF or MP3) attached to this share. If SWF, you must also specify picture to provide a thumbnail for the video.
+data-name: The name of the link attachment.
+data-caption: The caption of the link (appears beneath the link name). If not specified, this field is automatically populated with the URL of the link.
+data-description: The description of the link (appears beneath the link caption). If not specified, this field is automatically populated by information scraped from the link, typically the title of the page.
+data-properties: A JSON object of key/value pairs which will appear in the stream attachment beneath the description, with each property on its own line. Keys must be strings, and values can be either strings or JSON objects with the keys text and href.
+data-actions: A JSON array containing a single object describing the action link which will appear next to the 'Comment' and 'Like' link under posts. The contained object must have the keys name and link.
+data-callback: The Scope function which will receive [FB's Response object](https://developers.facebook.com/docs/javascript/reference/FB.ui)
+*/
 ```
 
-Call the directive wherever you want in your html page
+Twitter
+----
+Include the twitter javascript in your HTML. 
+```html
+<script src="http://platform.twitter.com/widgets.js"></script>
+```
+Add Directive to the element where you want to display your Twitter Button
+```html
+<a twitter  data-lang="en" data-count='horizontal' data-url='http://google.com' data-via='notsosleepy' data-size="medium" data-text='Testing Twitter Share' ></a>
+```
+The Attributes for the directives are
+```js
+/*
+data-lang: Language of the tweet
+data-url: URL of the Shared Content
+data-count: Position of the share counter
+data-size: Size of the tweet button
+data-text: Content of the tweet
+data-via: User handle which will be tagged in the tweet
+For options checkout https://dev.twitter.com/docs/tweet-button
+*/
+```
+Linkedin
+----
+Although Linkedin has a share button and also a Javascript share API it does not take the title and the content as its parameters hence we will have to use the raw share URL to share the content.
+
+Use the Linkedin Directive
+```html
+<div linkedin class="linkedinShare" data-url='http://www.google.com.au' data-title='Linkedin Share' data-summary="testing Linkedin Share" data-shares='linkedinshares'>{{linkedinshares}}</div>
+```
+Linkedin Directive works similar to the Facebook Mechanism. This will force us to add our own style to the button and also display count which is fetched by the directive through a diffrent API. The supplied stylesheet contains styling for the horizontal styled button.
+
+The Attributes for the directives are
+```js
+/*
+data-title: Title of the Shared Content
+data-url: URL of the Shared Content
+data-summary: Summary of the content
+data-shares: The Scope variable on which share count will be binded to. This lets you put
+multiple share buttons on a single page and bind the share count to the respective model object.
+*/
+```
+
+Google +
+----
+```html
+ <div gplus class="g-plus" data-size="tall" data-annotation="bubble" data-href='http://google.com' data-action='share'></div>
+```
+For more information on the share button attributes check the [Google Share Documentation]
+>If you change the class of the button to `g-plusone' it will be converted to a google plus one button.
+
+Tumblr
+----
+
+
+####Link Share
+Include the tumblr javascript in your HTML. 
+```html
+<script src="http://platform.tumblr.com/v1/share.js"></script>
+
+```
 
 ```html
-<a href="#"
-socialshare
-socialshare-provider="twitter"
-socialshare-text="720kb AngularJS Socialshare"
-socialshare-hashtags="angularjs, angular-socialshare"
-socialshare-url="http://720kb.net">
-Share me
-</a>
+<div tumblr-text data-url='http://google.com' data-name='Sharing to Tumblr' data-title='test' data-buttontext='Sharing Text' data-styling="display:inline-block; text-indent:-9999px; overflow:hidden; width:129px; height:20px; background:url('http://platform.tumblr.com/v1/share_3.png') top left no-repeat transparent;" data-description='this is awesome'></div>  
+
 ```
-OR
-
-Call the Socialshare [service](#service)
-
-```javascript
-  .controller('Ctrl', ['Socialshare', function testController(Socialshare) {
-
-    Socialshare.share({
-      'provider': 'facebook',
-      'attrs': {
-        'socialshareUrl': 'http://720kb.net'
-      }
-    });
+The Attributes for the directives are
+```js
+/*
+data-url: URL of the content to be shared
+data-name: Name of the content URL
+data-title(Optional): Title of the button on hover
+data-description: Description of the URL
+data-style(Optional): Style of the button
+*/
 ```
 
-
-##Usage
-Angular socialshare allows you to use sharing options via `attribute` data
-
-####Sharing Provider
-You can set the social platform you want to share on using the `socialshare-provider=""` attribute.
-
-#####Providers:
-
-- [email](#email)
-- [facebook](#facebook)
-- [facebook-messenger](#facebook-messenger)
-- [twitter](#twitter)
-- [linkedin](#linkedin)
-- [google](#google-plus)
-- [pinterest](#pinterest)
-- [tumblr](#tumblr)
-- [reddit](#reddit)
-- [stumbleupon](#stumbleupon)
-- [buffer](#buffer)
-- [digg](#digg)
-- [delicious](#delicious)
-- [vk](#vk)
-- [ok](#vk)
-- [pocket](#pocket)
-- [wordpress](#wordpress)
-- [flipboard](#flipboard)
-- [xing](#xing)
-- [hackernews](#hacker-news)
-- [evernote](#evernote)
-- [whatsapp](#whatsapp)
-- [telegram](#telegram)
-- [viber](#viber)
-- [skype](#skype)
-- [sms](#sms)
-
-Please use them all in lowercase (`socialshare-provider="delicious"`)
-
-##Doc
-
-####Facebook
-
-(`socialshare-provider="facebook"`)
-
-`share` = [Facebook Dialog Share](https://developers.facebook.com/docs/sharing/reference/share-dialog),    `feed` = [Facebook Dialog Feed](https://developers.facebook.com/docs/sharing/reference/feed-dialog), `send` = [Facebook Dialog Send](https://developers.facebook.com/docs/sharing/reference/send-dialog),  `sharer` = [Facebook simple share](https://developers.facebook.com/docs/plugins/share-button)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	share, feed, send, sharer		| socialshare-url="" 	 | page URL | false |		Set the url to share
- 	feed		| socialshare-text="" 	 | String |	 false	| Set the headline to share
-	share		| socialshare-title="" 	 | String |	 false	| Set the title headline to share
- 	feed,share		| socialshare-description="" 	 | String |	 false	| Set the content to share
- 	feed, share		| socialshare-media="" 	 |	URL |	false | Set the media source to share
- 	feed, send, share		| socialshare-type=""	 | String('feed', 'send', 'share') | share |		facebook share dialog  - [info](https://developers.facebook.com/docs/sharing/reference/share-dialog), facebook feed dialog  - [info](https://developers.facebook.com/docs/sharing/reference/feed-dialog) and send dialog  - [info](https://developers.facebook.com/docs/sharing/reference/send-dialog)
- 	feed, send, share		| socialshare-via="" 	 |	String | false | 	Set the FB APP ID value
- 	feed, send	| socialshare-to="" 	 |	String	| false | Set the to value
- 	feed		| socialshare-from="" 	 |	String	| false | Set the from to value
- 	feed, send		| socialshare-ref="" 	 |	String('comma,separated') | false |	Set the ref value
- 	feed, send, share		| socialshare-display="" 	 | String('popup') | false |	Set the display value
- 	feed, share		| socialshare-quote="" 	 | String | false |	Set the display text 
-	feed, share		| socialshare-hashtags="" 	 | String | false |	Set the display value along with #     Eg:#facebook
- 	feed		| socialshare-source="" 	 | URL | false |	Set the source value
- 	feed, share		| socialshare-caption="" 	 | String | false |	Set the caption to share
-  feed, send		| socialshare-redirect-uri="" 	 | URL | false |	Set the redirect URI
-
-
-####Facebook Messenger
-`mobile only` - (works only for `<a>` elements, it is a direct link)
-
-(`socialshare-provider="facebook-messenger"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer    | socialshare-url="" |  URL | page URL| Set the url to share
-
-
-####Twitter
-
-(`socialshare-provider="twitter"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	sharer		| socialshare-url="" |	URL | page URL|	Set the url to share
- 	sharer		| socialshare-text="" | String	| false |	Set the content to share
- 	sharer		| socialshare-via="" | String('username') | false |	Set the via to share
-  sharer		| socialshare-hashtags="" |	String('hash,tag,hastag')| false   |	Set the hashtags to share
-
-
-####Linkedin
-
-(`socialshare-provider="linkedin"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	        |	URL     | page URL  |	Set the url to share
-	sharer		| socialshare-text=""           | String	| false     |	Set the title value that you wish to use
-    sharer		| socialshare-description=""    | String    | false     |   Set the description value that you wish to use
-    sharer      | socialshare-source=""         | String    | false     |   Set the source of the content
-
-####Reddit
-
-(`socialshare-provider="reddit"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-  sharer		| socialshare-subreddit="" 	 | String('technology')	| false |	Set the subreddit to share on
-
-####Vk
-
-(`socialshare-provider="vk"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
- 	sharer		| socialshare-text="" 	 | String |	 false	| Set the title to share
- 	sharer		| socialshare-description="" 	 | String |	 false	| Set the content to share
- 	sharer		| socialshare-media="" 	 | URL |	false | Set the image source to share
-####OK
-(ok.ru)
-
-(`socialshare-provider="ok"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-
-####Digg
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-	sharer		| socialshare-media="" 	 | URL | false |		Set the media url to share
-
-####Delicious
-
-(`socialshare-provider="delicious"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
- 	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-  sharer		| socialshare-media="" 	 | URL | false |		Set the media url to share
-
-####StumbleUpon
-
-(`socialshare-provider="stumbleupon"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-	sharer		| socialshare-media="" 	 | URL | false |		Set the media url to share
-
-####Pinterest
-
-(`socialshare-provider="pinterest"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
- 	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
- 	sharer		| socialshare-media="" 	 | URL | false |		Set the media url to share
-
-####Google (Plus)
-
-(`socialshare-provider="google"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-
-####Tumblr
-
-(`socialshare-provider="tumblr"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-  sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-  sharer		| socialshare-media="" 	 | URL | false |		Set the media url to share
-
-####Buffer
-
-(`socialshare-provider="buffer"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-  sharer		| socialshare-via="" 	 | URL | false |		Set the buffer via
-  sharer    | socialshare-media="" | URL | false | Set the image url to share 
-
-####Pocket
-
-(`socialshare-provider="pocket"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text=""  | String	| false |	Set the content to share
-
-####Flipboard
-
-(`socialshare-provider="flipboard"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text=""  | String	| false |	Set the content to share
-
-####Evernote
-
-(`socialshare-provider="evernote"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
- 	sharer		| socialshare-url="" |	URL | page URL|	Set the url to share
- 	sharer		| socialshare-text="" | String	| false |	Set the content title to share
-
-
-####Hacker News
-
-(`socialshare-provider="hackernews"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text=""  | String	| false |	Set the content to share
-
-####Wordpress
-
-(`socialshare-provider="wordpress"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text=""  | String	| false |	Set the content to share
-  sharer		| socialshare-media="" | URL | false | Set the media url to share
-
-
-####Xing
-
-(`socialshare-provider="xing"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-	sharer		| socialshare-url="" 	 |	URL | page URL|	Set the url to share
-	sharer		| socialshare-text="" 	 | String	| false |	Set the content to share
-	sharer		| socialshare-media="" 	 | URL | false |		Set the media url to share
-  sharer		| socialshare-follow="" 	 | URL | false |		Set the Xing page url which will be then suggested to you to follow
-
-
-####Whatsapp
-`mobile only` - (works only for `<a>` elements, it is a direct link)
-
-(`socialshare-provider="whatsapp"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer    | socialshare-url="" |  URL | page URL| Set the url to share
-  sharer    | socialshare-text="" | String  | false | Set the content to share
-
-####Telegram
-
-(`socialshare-provider="telegram"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer    | socialshare-url="" |  URL | page URL| Set the url to share
-  sharer    | socialshare-text="" | String  | false | Set the content to share
-
-
-####Viber
-`mobile only` -  (works only for `<a>` elements, it is a direct link)
-
-(`socialshare-provider="viber"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer    | socialshare-url="" |  URL | page URL| Set the url to share
-  sharer    | socialshare-text="" | String  | false | Set the content to share
-
-
-####Skype
-
-(`socialshare-provider="skype"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer    | socialshare-url=""   |  URL | page URL| Set the url to share
-  sharer    | socialshare-text=""  | String | false | Set the content to share
-
-####Email
-
-(`socialshare-provider="email"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  mailto    | socialshare-subject=""   |  String | false | Set the subject for the email
-  mailto    | socialshare-body=""  | String | false | Set the body content for the email
-  mailto    | socialshare-to=""  | String | false | Set the Receiver / Receivers
-  mailto    | socialshare-cc=""  | String | false | Set the CC / CCs for the email
-  mailto    | socialshare-bcc=""  | String | false | Set the BCC / BCCs for the email
-
-####Sms
-(works only for `<a>` elements, it is a direct link)
-
-(`socialshare-provider="sms"`)
-
-Method | Option | Type | Default | Description
-------------- | ------------- | ------------- | ------------- | -------------
-  sharer    | socialshare-to="" |  URL | page URL| Set the phone number of the contact
-  sharer    | socialshare-text="" | String  | false | Set the content to share
-  
-##Options
-
-####Sharing Popup Size
-You can set a specific Height or Width for the sharing popup using the `socialshare-popup-height=""` and `socialshare-popup-width=""` attributes (sometimes, if if the popup is too small, it gets resized by third parties)
+####Qoute Share
 
 ```html
-<a href="#"
-socialshare
-socialshare-provider="reddit"
-socialshare-url="http://720kb.net"
-socialshare-text="Sharing it!"
-socialshare-popup-height="800"
-socialshare-popup-width="800">
-Share with a bigger popup
-</a>
+<div tumblr-qoute data-qoute='Texting Tumblr Qoute share' data-source='http://djds4rce.github.io'></div>  
+```
+The Attributes for the directives are
+```js
+/*
+data-source: Source URL of the qoute to be shared
+data-qoute: Qoute to be shared
+data-title(Optional): Title of the button on hover
+data-style(Optional): Style of the button
+*/
 ```
 
-####Sharing Event Trigger
-You can choose to bind a different event trigger for showing up the sharer popup using the `socialshare-trigger=""` attribute (you can use any angular `element.bind()` event you want)
+####Image Share
 
 ```html
-<a href="#"
-socialshare
-socialshare-provider="reddit"
-socialshare-text="Sharing on mouseover"
-socialshare-trigger="mouseover">
-Share me when mouse is over
-</a>
+<div tumblr-image data-source='http://plnkr.co/img/plunker.png' data-caption='Image Share' data-clickthru='http://google.com'></div>  
 ```
-or a set of
+The Attributes for the directives are
+```js
+/*
+data-source: Source URL of the Image to be shared
+data-caption: Caption for the image
+data-clickthru: clickthru URL for the image
+data-title(Optional): Title of the button on hover
+data-style(Optional): Style of the button
+*/
+```
+
+####Image Share
 
 ```html
-<a href="#"
-socialshare
-socialshare-provider="reddit"
-socialshare-text="Sharing on mouseover"
-socialshare-trigger="focusout mouseleave">
-Share me when focusout or mouseleave
-</a>
+<div tumblr-video data-embedcode='<iframe width="560" height="315" src="//www.youtube.com/embed/aqHBLS_6gF8" frameborder="0" allowfullscreen></iframe>'></div>  
+```
+The Attributes for the directives are
+```js
+/*
+data-embedcode: Embed code for the external video
+data-caption: Caption for the Video
+data-title(Optional): Title of the button on hover
+data-style(Optional): Style of the button
+*/
 ```
 
-##Service
-You may need to share from a controller (for example), this is how to use the `Socialshare` service:
 
-```javascript
-  .controller('Ctrl', ['Socialshare', function testController(Socialshare) {
+Pinterest
+----
 
-    Socialshare.share({
-      'provider': 'facebook',
-      'attrs': {
-        'socialshareUrl': 'http://720kb.net'
-      }
-    });
+Include the  Pinterest javascript in your HTML. 
+```html
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js" data-pin-build='parsePins'></script>
 
-    Socialshare.share({
-      'provider': 'twitter',
-      'attrs': {
-        'socialshareUrl': 'http://720kb.net',
-        'socialshareHashtags': '720kb, angular, socialshare'
-      }
-    });
-    //every attrs must be in camel case as showed above
-    //this will open the share popup immediately without any trigger event required
 ```
-_Some providers (specially mobile provider, such as: Viber, Whatsapp etc..) do not work with a Service call, because their API or Usage does not allow a trigger event on them_
 
-##Globals
 
-####Provider setup
-Sometimes you may need to set default values for all the sharing buttons, here is how to setup this:
-
-```javascript
-.config(['socialshareConfProvider', function configApp(socialshareConfProvider) {
-
-  socialshareConfProvider.configure([
-    {
-      'provider': 'twitter',
-      'conf': {
-        'url': 'http://720kb.net',
-        'text': '720kb is enough',
-        'via': 'npm',
-        'hashtags': 'angularjs,socialshare,angular-socialshare',
-        'trigger': 'click',
-        'popupHeight': 800,
-        'popupWidth' : 400
-      }
-    },
-    {
-      'provider': 'facebook',
-      'conf': {
-        'url': 'http://720kb.net',
-        'trigger': 'mouseover',
-        'popupHeight': 1300,
-        'popupWidth' : 1000
-      }
-    }
-  //and so on ...
-  ]);
-}]);
+####Usage
+```html
+<div pintrest data-href='http://google.com' data-description='testing share' data-img='http://plnkr.co/img/plunker.png' data-pin-do='buttonPin' data-pin-config='beside'></div>
 ```
-*NB* if you define the provider settings, but then you change the option value by html attributes, the html attribute value will be the final one (the one that will be used)
+
+The Attributes for the directives are
+
+```js
+/*
+data-href: Url To be shared
+data-Description: Description of the content
+data-img: Image for the Pin
+data-pin-do(Optional): Type of pin
+data-pin-config(Optional): Pin count Orientation 'beside' or 'above'
+*/
+```
 
 
-####[Live demo](https://720kb.github.io/angular-socialshare)
+**Made with Love by [Djds4rce]**
+**Additions with ♡ by [haxxxton]**
 
 
-##Contributing
 
-We will be much grateful if you help us making this project to grow up.
-Feel free to contribute by forking, opening issues, pull requests etc.
+[Explained Here]:http://ericduran.io/2013/05/31/angular-html5Mode-with-yeoman/
+[Demo]:http://plnkr.co/edit/Cah9FtwXDrUMQjChdBG2?p=info    
+[Google Share Documentation]:https://developers.google.com/+/web/share/
+[Djds4rce]:http://djds4rce.wordpress.com/
+[haxxxton]:http://gaandder.com/
 
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2014 Filippo Oretti, Dario Andrei
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Licenced Under MIT Licence. 

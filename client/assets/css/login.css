@@ -16,6 +16,13 @@ fieldset{
    line-height: 25px;
    height: 190px;
 }
+#leftheader{
+   display: inline-block;
+}
+#rightheader{
+   display: inline-block;
+   float: right;
+}
 #submit{
    padding: 2px 5px;
 }

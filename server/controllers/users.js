@@ -3,7 +3,7 @@ var Post = mongoose.model('Post');
 var User = mongoose.model('User');
 var Admin = mongoose.model('Admin');
 var Comment = mongoose.model('Comment');
-var Trip = mongoose.model('Trip');
+var Surfboard = mongoose.model('Surfboard');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
@@ -83,7 +83,15 @@ module.exports = {
                      req.session.user={first_name: user.first_name,
                                        last_name: user.last_name,
                                        username: user.username,
-                                       _id: user._id};
+                                       email: user.email,
+                                       _id: user._id,
+                                       height: user.height,
+                                       level: user.level,
+                                       fitness: user.fitness,
+                                       weight: user.weight,
+                                       surfingsince: user.surfingsince,
+                                       birthdate: user.birthdate,
+                                       createdAt: user.createdAt};
                      console.log('successfully added a new user')
                      res.status(200).send("session user established")
                   }
@@ -104,12 +112,18 @@ module.exports = {
                   req.session.admin = {
                      email: admin.email
                   };
-                  req.session.user = {
-                     first_name: user.first_name,
-                     last_name: user.last_name,
-                     username: user.username,
-                     _id: user._id
-                  };
+                  req.session.user={first_name: user.first_name,
+                                    last_name: user.last_name,
+                                    username: user.username,
+                                    email: user.email,
+                                    _id: user._id,
+                                    height: user.height,
+                                    level: user.level,
+                                    fitness: user.fitness,
+                                    weight: user.weight,
+                                    surfingsince: user.surfingsince,
+                                    birthdate: user.birthdate,
+                                    createdAt: user.createdAt};
                   res.send(admin.email);
                }
             });
@@ -153,12 +167,18 @@ module.exports = {
          }
          else if (user && user.validPassword(req.body.password)){
             console.log('successfully logged in user');
-            req.session.user = {
-               first_name: user.first_name,
-               last_name: user.last_name,
-               username: user.username,
-               _id: user._id
-            };
+            req.session.user={first_name: user.first_name,
+                              last_name: user.last_name,
+                              username: user.username,
+                              email: user.email,
+                              _id: user._id,
+                              height: user.height,
+                              level: user.level,
+                              fitness: user.fitness,
+                              weight: user.weight,
+                              surfingsince: user.surfingsince,
+                              birthdate: user.birthdate,
+                              createdAt: user.createdAt};
             res.send(user);
          }
          else{
@@ -347,9 +367,57 @@ module.exports = {
                   first_name: user.first_name,
                   last_name: user.last_name,
                   username: user.username,
-                  _id: user._id
+                  email: user.email,
+                  _id: user._id,
+                  height: user.height,
+                  level: user.level,
+                  fitness: user.fitness,
+                  weight: user.weight,
+                  surfingsince: user.surfingsince,
+                  birthdate: user.birthdate,
+                  createdAt: user.createdAt
                };
                res.json(user);
+            }
+         })
+      }
+   },
+   updateuser: function(req, res){
+      if(typeof req.session.user == 'undefined' || null == req.session.user){
+         res.json();
+      }else{
+         User.findOne({_id: req.session.user._id}, function(err, user){
+            if(err){
+               console.log('issue getting session user');
+               res.sendStatus('500');
+            }else{
+               user.height = req.body.height;
+               user.weight = req.body.weight;
+               user.birthdate = req.body.birthdate;
+               user.level = req.body.level;
+               user.fitness = req.body.fitness;
+               user.save(function(err, user){
+                  if (err){
+                       res.json(err);
+                       console.log('Issues editing user')
+                  }
+                  else{
+                     req.session.user={first_name: user.first_name,
+                                       last_name: user.last_name,
+                                       username: user.username,
+                                       email: user.email,
+                                       _id: user._id,
+                                       height: user.height,
+                                       level: user.level,
+                                       fitness: user.fitness,
+                                       weight: user.weight,
+                                       surfingsince: user.surfingsince,
+                                       birthdate: user.birthdate,
+                                       createdAt: user.createdAt};
+                     console.log('successfully edited user')
+                     res.status(200).send("session user established")
+                  }
+               })
             }
          })
       }
