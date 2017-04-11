@@ -120,7 +120,8 @@
                   <br>User height: {{surfboard.user[0].height}}
                </div>
                <div class="rating">
-                  User experience level: {{surfboard.user[0].level}}
+                  Surfing Since: {{surfboard.user[0].surfingsince | date:'MMM yyyy'}}
+                  <br>User experience level: {{surfboard.user[0].level}}
                   <br>User fitness level: {{surfboard.user[0].fitness}}
                </div>
                <p>Overall Rating: {{surfboard.rating}}</p>
@@ -282,7 +283,7 @@
             <option value="Longboard">Longboard</option>
             <option value="Hybrid">Hybrid</option>
             <option value="Fish">Fish</option>
-            <option value="Egg">Egg/Funboard</option>
+            <option value="Funboard">Funboard</option>
             <option value="Gun">Gun</option>
             <option value="SUP">SUP</option>
          </select></p>

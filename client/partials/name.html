@@ -1,14 +1,14 @@
 <link rel="stylesheet" type="text/css" href="assets/css/name.css">
 <div id="container" ng-controller="nameController">
    <update-title title="Surfboard Reviews - {{surfboards[0].name}}"></update-title>
-   <update-meta name="description" content="Surfing Journeys - Share your surf travel experiences, and learn from other users' surfboards and reviews."></update-meta>
+   <update-meta name="description" content="Surfboard Ratings - Share your surfboard experiences, and learn from other users' reviews."></update-meta>
    <div class="col6 offset-left2">
          <button class="btn btn-medium font-bold"
                 socialshare
                 socialshare-provider="email"
                 socialshare-body= {{url}}
                 socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-                socialshare-subject="surfingJourneys.com"
+                socialshare-subject="surfboardRatings.com"
                 socialshare-popup-height="300"
                 socialshare-popup-width="400">
             <i class="fa fa-envelope"></i> Email
@@ -18,7 +18,7 @@
                socialshare-provider="facebook"
                socialshare-type="sharer"
                socialshare-text="Surfing Destinations Reviews"
-               socialshare-url= "surfingJourneys.com"
+               socialshare-url= "surfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
                socialshare-trigger="click">
@@ -69,10 +69,17 @@
    </div>
    <div id="locations">
       <p><font color="red"><b><i>{{errors.text.message}}</i></b></font></p>
-      <h3>{{surfboards[0].name}} - Reviewed {{surfboards.count}} time<span ng-if="surfboards.count>1">s</span></h3>
+      <h3>Surfboard: {{surfboards[0].name}}</h3>
+      <div id='surfboardDescription'>
+         <p ng-bind-html='description'></p>
+      </div>
+      <h3>Reviewed {{surfboards.count}} time<span ng-if="surfboards.count>1">s</span></h3>
       Sort: <select id="sort" ng-model="sortorder">
          <option value="-createdAt">Date Posted</option>
          <option value="-rating">Rating</option>
+         <option value="manufacturer">Brand</option>
+         <option value="user[0].username">User Name</option>
+         <option value="-user[0].level">User Experience Level</option>
       </select>
       <label><input class='input' ng-model="filter" placeholder="filter.."></label>
       <b><p>Overall Rating: {{surfboards.averageRating}}</p>
@@ -86,7 +93,7 @@
       </div></b><div id='manufacturer' ng-repeat="surfboard in surfboards | unique: 'manufacturer' | filter: filter | filter:{manufacturer:surfboard.manufacturer}">
          <h4>Brand: <a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a></h4>
          <div id="surfboard" ng-repeat="surfboard in surfboards | filter:{manufacturer:surfboard.manufacturer} | orderBy:sortorder">
-            <p><b>{{surfboard.boardlength}} {{surfboard.name}} - {{surfboard.customdims}} dimensions</b></p>
+            <p><b>{{surfboard.boardlength}} {{surfboard.name}} - <a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - {{surfboard.customdims}} dimensions</b></p>
             <p>Posted by <a id="userlink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
             <div class="rating">
                User age: {{surfboard.user[0].age}}
@@ -94,7 +101,8 @@
                <br>User height: {{surfboard.user[0].height}}
             </div>
             <div class="rating">
-               User experience level: {{surfboard.user[0].level}}
+               Surfing Since: {{surfboard.user[0].surfingsince | date:'MMM yyyy'}}
+               <br>User experience level: {{surfboard.user[0].level}}
                <br>User fitness level: {{surfboard.user[0].fitness}}
             </div>
             <p>Overall Rating: {{surfboard.rating}}</p>
@@ -112,7 +120,7 @@
                <h4>I am reporting this comment as:</h4>
                <input class='reportfield' type='text' ng-model='report.report'>
                <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(surfboard,report)">
-               <p class='reporttext'>Reported comments and users will be reviewed by SurfingJourneys.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
+               <p class='reporttext'>Reported comments and users will be reviewed by surfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
             </form>
             <h4 class='commentsHeading'>Comments:</h4>
             <form id="newcomment">
@@ -133,7 +141,7 @@
                   <h4>I am reporting this comment as:</h4>
                   <input class='reportfield' type='text' ng-model='report.report'>
                   <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(post,report)">
-                  <p class='reporttext'>Reported comments and users will be reviewed by SurfingJourneys.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
+                  <p class='reporttext'>Reported comments and users will be reviewed by surfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
                </form>
                <div id="replies" ng-repeat="comment in post.comments | orderBy:'-createdAt'" ng-if='post[showreplies]'>
                   <p>{{comment._user.username}} - {{comment.createdAt | date: 'MMM dd, yyyy'}}: {{comment.text}}</p>
@@ -142,7 +150,7 @@
                      <h4>I am reporting this comment as:</h4>
                      <input class='reportfield' type='text' ng-model='report.report'>
                      <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(comment,report)">
-                     <p class='reporttext'>Reported comments and users will be reviewed by SurfingJourneys.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
+                     <p class='reporttext'>Reported comments and users will be reviewed by surfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
                   </form>
                </div>
             </div>

@@ -4,6 +4,7 @@ var User = mongoose.model('User');
 var Comment = mongoose.model('Comment');
 var Surfboard = mongoose.model('Surfboard');
 var Type = mongoose.model('Type');
+var SurfboardDetail = mongoose.model('SurfboardDetail');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
@@ -43,6 +44,17 @@ module.exports = {
             console.log('successfully getting name surfboards');
          }
          res.json(surfboards);
+      })
+   },
+   surfboardDescriptions: function(req,res){
+      SurfboardDetail.find({name: req.params.id}).exec(function(err, surfboarddescrip){
+         if(err){
+            console.log('surfboard description loading error');
+            return res.sendStatus('500');
+         }else{
+            console.log('successfully getting surfboard descriptions');
+         }
+         res.json(surfboarddescrip);
       })
    },
    manufacturerSurfboards: function(req,res){
@@ -173,6 +185,17 @@ module.exports = {
                   })
                }
             })
+         }
+      })
+   },
+   newSurfboardDescription: function(req, res){
+      SurfboardDetail.update({name: req.body.name}, req.body, {upsert: true}, function(err, surfboarddescrip){
+         if(err){
+            console.log('surfboard description loading error');
+            res.json(err)
+         }else{
+            console.log('@@@@@@@@@@@@@ successfully added a new surfboard description');
+            res.json(surfboarddescrip);
          }
       })
    },
@@ -474,7 +497,7 @@ module.exports = {
       let mailOptions = {
          from: req.body.email,
          to: 'andersonc@surfingjourneys.com',
-         subject: 'SurfingJourneys.com Contact - Inappropriate Content',
+         subject: 'surfboardRatings.com Contact - Inappropriate Content',
          text: "Report of Inappropriate Comment Sent" + '\n\n' + "Comment: " + '\n\n' + "Surfboard description: " + '\n'+ req.body.description + '\n\n' + "Post or Surfboard text: " + '\n' + req.body.text + '\n\n' + "Reason: "+req.body.report + '\n\n' + req.body._id
       };
       transporter.sendMail(mailOptions, function(err) {
@@ -491,7 +514,7 @@ module.exports = {
             res.json({
                errors: {
                   login: {
-                    message: 'Your message has been sent to SurfingJourneys.com',
+                    message: 'Your message has been sent to surfboardRatings.com',
                   }
                },
             name: "Validation error"

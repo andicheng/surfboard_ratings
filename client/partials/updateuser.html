@@ -1,14 +1,14 @@
 <link rel="stylesheet" type="text/css" href="assets/css/types.css">
 <div id="container" ng-controller="log_regController">
-   <update-title title="Surfing Journeys: Manufacturer Reviews - {{surfboards[0].manufacturer}}"></update-title>
-   <update-meta name="description" content="Surfing Journeys - Share your surf travel experiences, and learn from other users' surfboards and reviews."></update-meta>
+   <update-title title="Surfboard Ratings"></update-title>
+   <update-meta name="description" content="Surfboard Ratings - Share your surfboard experiences, and learn from other users' reviews."></update-meta>
    <div class="col6 offset-left2">
          <button class="btn btn-medium font-bold"
                 socialshare
                 socialshare-provider="email"
                 socialshare-body= {{url}}
                 socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-                socialshare-subject="surfingJourneys.com"
+                socialshare-subject="surfboardRatings.com"
                 socialshare-popup-height="300"
                 socialshare-popup-width="400">
             <i class="fa fa-envelope"></i> Email
@@ -18,7 +18,7 @@
                socialshare-provider="facebook"
                socialshare-type="sharer"
                socialshare-text="Surfing Destinations Reviews"
-               socialshare-url= "surfingJourneys.com"
+               socialshare-url= "surfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
                socialshare-trigger="click">
@@ -68,7 +68,7 @@
           </button>
    </div>
    <div id="locations">
-      <h3>Edit Your Personal Information <span ng-if="user">{{user.username}}</span></h3><b><span id="noUser" ng-if="!user">(Please register or log in to continue!)</span></b>
+      <h3>Edit Your Personal Information <span ng-if="user">{{user.username}}</span></h3><b><span id="noUser" ng-if="!user">(Please <a href='#/login'>Log In</a> to continue!)</span></b>
       <form ng-show="user">
          <p><span class="label">First Name:</span>{{user.first_name}}</p>
          <p><span class="label">Last Name:</span>{{user.last_name}}</p>

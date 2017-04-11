@@ -271,7 +271,7 @@ module.exports = {
       let mailOptions = {
          from: '',
          to: 'andersonc@surfingjourneys.com',
-         subject: 'SurfingJourneys.com Contact - '+ req.body.subject,
+         subject: 'surfboardRatings.com Contact - '+ req.body.subject,
          text: req.body.personname + ' @ '+req.body.email+' wrote: '+ req.body.message,
       };
       transporter.sendMail(mailOptions, function(err) {
@@ -288,7 +288,7 @@ module.exports = {
             res.json({
                errors: {
                   login: {
-                    message: 'Your message has been sent to SurfingJourneys.com.',
+                    message: 'Your message has been sent to surfboardRatings.com.',
                   }
                },
             name: "Validation error"

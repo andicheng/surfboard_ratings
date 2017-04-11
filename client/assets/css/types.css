@@ -3,6 +3,10 @@
    padding: 0px;
    color: white;
 }
+h2{
+   font-size: 22px;
+   margin-top: 15px;
+}
 .label{
    display: inline-block;
    width: 240px;
@@ -147,4 +151,69 @@ img{
       }
       .paddle{
          width: 15%;
+      }
+      #footer{
+         padding: 5px 10px;
+         background-color: #0A384F;
+         min-width: 960px;
+      }
+      #copyright{
+         font-size: 13px;
+      }
+      .foot{
+         display: inline-block;
+         width: 24%;
+         text-align: center;
+         color: white;
+      }
+      .foot a{
+         color: white;
+         text-decoration: none;
+      }
+      .foot a:hover{
+         color: yellow;
+      }
+      #legal{
+         margin-right: 1%;
+         margin-bottom: 20px;
+         padding: 1%;
+         border-style: solid;
+         border-color: lightgrey;
+         border-width: thin;
+         background-color: white;
+         opacity: 0.85;
+      }
+      #dmca{
+         margin-right: 1%;
+         margin-bottom: 20px;
+         padding: 1%;
+         border-style: solid;
+         border-color: lightgrey;
+         border-width: thin;
+         background-color: white;
+         opacity: 0.85;
+      }
+      #about{
+         margin-right: 1%;
+         margin-bottom: 20px;
+         padding: 1%;
+         border-style: solid;
+         border-color: lightgrey;
+         border-width: thin;
+         background-color: white;
+         opacity: 0.85;
+      }
+      #contact{
+         margin-right: 1%;
+         margin-bottom: 20px;
+         padding: 1%;
+         border-style: solid;
+         border-color: lightgrey;
+         border-width: thin;
+         background-color: white;
+         opacity: 0.85;
+      }
+      .lettered{
+         list-style-type: lower-alpha;
+         margin-left: 20px;
       }

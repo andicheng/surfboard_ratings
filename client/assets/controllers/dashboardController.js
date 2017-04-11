@@ -6,7 +6,6 @@ app.controller('dashboardController', ['$scope','usersFactory','surfboardsFactor
    var getSurfboards = function(){
    surfboardsFactory.getSurfboards(function(returned_data){
       $scope.surfboards = returned_data;
-      console.log(returned_data);
       $scope.url = $location.absUrl();
       for(var i=0; i<$scope.surfboards.length; i++){
          $scope.surfboards[i].boardlength = Math.floor($scope.surfboards[i].boardlength/12)+"'"+($scope.surfboards[i].boardlength%12)+'"'

@@ -1,14 +1,14 @@
 <link rel="stylesheet" type="text/css" href="assets/css/types.css">
 <div id="container" ng-controller="typesController">
-   <update-title title="Surfing Journeys: Manufacturer Reviews - {{surfboards[0].manufacturer}}"></update-title>
-   <update-meta name="description" content="Surfing Journeys - Share your surf travel experiences, and learn from other users' surfboards and reviews."></update-meta>
+   <update-title title="Surfboard Ratings: Surfboard Types"></update-title>
+   <update-meta name="description" content="Surfboard Ratings - Share your surfboard experiences, and learn from other users' reviews."></update-meta>
    <div class="col6 offset-left2">
          <button class="btn btn-medium font-bold"
                 socialshare
                 socialshare-provider="email"
                 socialshare-body= {{url}}
                 socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-                socialshare-subject="surfingJourneys.com"
+                socialshare-subject="surfboardRatings.com"
                 socialshare-popup-height="300"
                 socialshare-popup-width="400">
             <i class="fa fa-envelope"></i> Email
@@ -18,7 +18,7 @@
                socialshare-provider="facebook"
                socialshare-type="sharer"
                socialshare-text="Surfing Destinations Reviews"
-               socialshare-url= "surfingJourneys.com"
+               socialshare-url= "surfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
                socialshare-trigger="click">
@@ -68,13 +68,26 @@
           </button>
    </div>
    <div id="locations">
+      <p>Board Type: <select id="sort" ng-model="boardType">
+         <option value=""></option>
+         <option value="Shortboard">Shortboard</option>
+         <option value="Fish">Fish</option>
+         <option value="Hybrid">Hybrid</option>
+         <option value="Egg/Funboard">Egg/Funboard</option>
+         <option value="Longboard">Longboard</option>
+         <option value="Gun">Gun</option>
+      </select></p>
+      <!-- <label><input class='input' ng-model="filter" placeholder="filter.."></label> -->
       <img src='../assets/images/surfboard_types.jpg'>
       <a href='http://www.freepik.com/free-vector/surfboard-in-different-size_889810.htm'>Designed by Freepik</a>
-      <div id="brands" ng-repeat="surfboard in surfboards | unique:'type' | orderBy:'type'">
-         <h2><a class="namelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}s</a></h2>
-         <div ng-repeat='typedescrip in typedescrips'>
-            <p id='typedescrip' ng-if='typedescrip.type == surfboard.type'>{{typedescrip.description}}</p>
-         </div>
+      <div ng-repeat='typedescrip in typedescrips | filter:{type:boardType} | orderBy:"type"'>
+         <h2><a class="namelink" href="#/type/{{typedescrip.type}}">{{typedescrip.type}}</a></h2>
+         <p id='typedescrip'>{{typedescrip.description}}</p>
+         <div id="brands" ng-repeat="surfboard in surfboards | unique:'type' | orderBy:'type'" ng-if='typedescrip.type == surfboard.type'>
+            <!-- <h2><a class="namelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}s</a></h2> -->
+            <!-- <div ng-repeat='typedescrip in typedescrips'>
+               <p id='typedescrip' ng-if='typedescrip.type == surfboard.type'>{{typedescrip.description}}</p>
+            </div> -->
             <div id="types" ng-repeat="surfboard in surfboards | filter:{type:surfboard.type} | unique:'manufacturer'">
                <h3><a class="namelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a></h3>
                <div id="names" ng-repeat="surfboard in surfboards | filter:{manufacturer:surfboard.manufacturer, type:surfboard.type} | unique:'name'">

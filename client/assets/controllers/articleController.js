@@ -24,6 +24,16 @@ app.controller('articleController', ['$scope','usersFactory','surfboardsFactory'
          }
       })
    }
+   $scope.newSurfboardDescription = function(){
+      surfboardsFactory.newSurfboardDescription($scope.surfboardDescription, function(data){
+         if(data.errors){
+            console.log('error saving new Surfboard Description')
+         }else{
+            $scope.surfboardDescription = {};
+            $location.url('/dashboard')
+         }
+      })
+   }
    $scope.logout = function(){
       console.log("logout clicked");
       usersFactory.logout(function(data){

@@ -1,8 +1,19 @@
-app.controller('manufacturerNameController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route) {
+app.controller('manufacturerNameController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route, $sce) {
 
    usersFactory.getUser(function(user){
       $scope.user = user;
    });
+   var getSurfboardDescriptions = function(){
+      surfboardsFactory.getSurfboardDescriptions($routeParams.name, function(data){
+         if(data.errors){
+            console.log('error getting article')
+         }else{
+            $scope.surfboarddescrip = data[0];
+            $scope.description = $sce.trustAsHtml($scope.surfboarddescrip.description);
+         }
+      })
+   };
+   getSurfboardDescriptions();
    var getmanufacturerNameSurfboards = function(){
    surfboardsFactory.getmanufacturerNameSurfboards($routeParams.manufacturer, $routeParams.name, function(returned_data){
       $scope.surfboards = returned_data;

@@ -353,7 +353,7 @@ module.exports = {
       let mailOptions = {
          from: req.body.email,
          to: 'andersonc@surfingjourneys.com',
-         subject: 'SurfingJourneys.com Contact - Inappropriate Content',
+         subject: 'surfboardRatings.com Contact - Inappropriate Content',
          text: "Report of Inappropriate Comment Sent" + '\n\n' + "Comment: " + '\n\n' + "Article description: " + '\n'+ req.body.description + '\n\n' + "Post or Comment text: " + '\n' + req.body.text + '\n\n' + "Reason: "+req.body.report + '\n\n' + req.body._id
       };
       transporter.sendMail(mailOptions, function(err) {
@@ -370,7 +370,7 @@ module.exports = {
             res.json({
                errors: {
                   login: {
-                    message: 'Your message has been sent to SurfingJourneys.com',
+                    message: 'Your message has been sent to surfboardRatings.com',
                   }
                },
             name: "Validation error"

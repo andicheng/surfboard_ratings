@@ -1,14 +1,14 @@
 <link rel="stylesheet" type="text/css" href="assets/css/type.css">
 <div id="container" ng-controller="typeController">
-   <update-title title="Surfing Journeys: Type Reviews - {{surfboards.type}}"></update-title>
-   <update-meta name="description" content="Surfing Journeys - Share your surf travel experiences, and learn from other users' surfboards and reviews."></update-meta>
+   <update-title title="Surfboard Ratings: Type Reviews - {{surfboards.type}}"></update-title>
+   <update-meta name="description" content="Surfboard Ratings - Share your surfboard experiences, and learn from other users' reviews."></update-meta>
    <div class="col6 offset-left2">
          <button class="btn btn-medium font-bold"
                 socialshare
                 socialshare-provider="email"
                 socialshare-body= {{url}}
                 socialshare-media="https://www.google.it/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-                socialshare-subject="surfingJourneys.com"
+                socialshare-subject="surfboardRatings.com"
                 socialshare-popup-height="300"
                 socialshare-popup-width="400">
             <i class="fa fa-envelope"></i> Email
@@ -18,7 +18,7 @@
                socialshare-provider="facebook"
                socialshare-type="sharer"
                socialshare-text="Surfing Destinations Reviews"
-               socialshare-url= "surfingJourneys.com"
+               socialshare-url= "surfboardRatings.com"
                socialshare-popup-height="300"
                socialshare-popup-width="400"
                socialshare-trigger="click">
@@ -73,21 +73,23 @@
       Sort: <select id="sort" ng-model="sortorder">
          <option value="-createdAt">Date Posted</option>
          <option value="-rating">Rating</option>
-         <option value="country">Country</option>
-         <option value="area">Area</option>
+         <option value="manufacturer">Brand</option>
+         <option value="name">Surfboard Name</option>
+         <option value="user[0].username">User Name</option>
       </select>
       <label><input ng-model="filter" placeholder="filter.."></label>
       <div id="surfboard" ng-repeat="surfboard in surfboards | filter: filter | orderBy:sortorder">
          <!-- <p><b><i><a id="regionlink" href="#/region/{{surfboard.region}}">{{surfboard.region}}</a> - <a id="countrylink" href="#/country/{{surfboard.country}}">{{surfboard.country}}</a>: <a id="arealink" href="#/area/{{surfboard.area}}">{{surfboard.area}}</a></i></b></p> -->
          <p><b><a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="typelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a> - {{surfboard.customdims}} dimensions</b></p>
-         <p>Posted on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
+         <p>Posted by <a class="typelink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
          <div class="rating">
             User age: {{surfboard.user[0].age}}
             <br>User weight: {{surfboard.user[0].weight}}
             <br>User height: {{surfboard.user[0].height}}
          </div>
          <div class="rating">
-            User experience level: {{surfboard.user[0].level}}
+            Surfing Since: {{surfboard.user[0].surfingsince | date:'MMM yyyy'}}
+            <br>User experience level: {{surfboard.user[0].level}}
             <br>User fitness level: {{surfboard.user[0].fitness}}
          </div>
          <p>Overall Rating: {{surfboard.rating}}</p>
@@ -136,7 +138,7 @@
                   <h4>I am reporting this comment as:</h4>
                   <input class='reportfield' type='text' ng-model='report.report'>
                   <input class='reportbutton' type="submit" value="SUBMIT" ng-click="reportcomments(comment,report)">
-                  <p class='reporttext'>Reported comments and users will be reviewed by SurfingJourneys.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
+                  <p class='reporttext'>Reported comments and users will be reviewed by surfboardRatings.com staff to determine whether they violate Terms of Use guidelines. Inappropriate comments will be removed, and repeated violations can lead to account termination.</p>
                </form>
             </div>
          </div>

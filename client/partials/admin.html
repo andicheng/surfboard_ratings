@@ -17,5 +17,13 @@
          <textarea id='text' style="width: 80%; height: 600px; color: black" type='text' ng-model='article.text'></textarea>
          <input id="submit" type="submit" value='Submit' ng-click='newArticle()'>
       </form>
+      <h3>Surfboard Description Form</h3>
+      <form>
+         <h5>Provide surfboard name</h5>
+         <input type="text" ng-model="surfboardDescription.name">
+         <h5>Provide the HTML text</h5>
+         <textarea id='text' style="width: 80%; height: 600px; color: black" type='text' ng-model='surfboardDescription.description'></textarea>
+         <input id="submit" type="submit" value='Submit' ng-click='newSurfboardDescription()'>
+      </form>
    </fieldset>
 </div>

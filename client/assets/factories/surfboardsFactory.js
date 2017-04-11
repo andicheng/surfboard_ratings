@@ -29,10 +29,21 @@ app.factory('surfboardsFactory', ['$http','$location', function($http, $location
          callback(res);
       })
    };
+   factory.newSurfboardDescription = function(surfboardDescription, callback){
+      $http.post('/newSurfboardDescription', surfboardDescription).then(function(res){
+         callback(res);
+      })
+   };
    factory.getNameSurfboards = function(name, callback){
       $http.get('/nameSurfboards/'+name).then(function(returned_data){
          surfboards = returned_data.data;
          callback(surfboards);
+      })
+   };
+   factory.getSurfboardDescriptions = function(name, callback){
+      $http.get('/surfboardDescriptions/'+name).then(function(returned_data){
+         surfboarddescrip = returned_data.data;
+         callback(surfboarddescrip);
       })
    };
    factory.getManufacturerSurfboards = function(manufacturer, callback){

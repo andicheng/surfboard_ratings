@@ -1,4 +1,4 @@
-app.controller('nameController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route) {
+app.controller('nameController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route, $sce) {
 
    usersFactory.getUser(function(user){
       $scope.user = user;
@@ -9,10 +9,20 @@ app.controller('nameController', ['$scope','usersFactory','surfboardsFactory', '
       // $scope.showreplies = false;
       $scope.url = $location.absUrl();
    });
+   var getSurfboardDescriptions = function(){
+      surfboardsFactory.getSurfboardDescriptions($routeParams.id, function(data){
+         if(data.errors){
+            console.log('error getting article')
+         }else{
+            $scope.surfboarddescrip = data[0];
+            $scope.description = $sce.trustAsHtml($scope.surfboarddescrip.description);
+         }
+      })
+   };
+   getSurfboardDescriptions();
    var getNameSurfboards = function(){
       surfboardsFactory.getNameSurfboards($routeParams.id, function(returned_data){
          $scope.surfboards = returned_data;
-         console.log(returned_data);
          var sum=0;
          var sumspeedrating=0;
          var summaneuverabilityrating=0;

@@ -16,6 +16,7 @@ module.exports = function(app){
    app.get('/surfboards', surfboards.index);
    app.get('/manufacturerSurfboards/:id', surfboards.manufacturerSurfboards);
    app.get('/nameSurfboards/:id', surfboards.nameSurfboards);
+   app.get('/surfboardDescriptions/:id', surfboards.surfboardDescriptions);
    app.get('/typeSurfboards/:id', surfboards.typeSurfboards);
    app.get('/manufacturerNameSurfboards/:manufacturer/:name', surfboards.manufacturerNameSurfboards);
    app.get('/surfboard/:id', surfboards.surfboard);
@@ -47,6 +48,7 @@ module.exports = function(app){
    app.post('/articlecommentthumbsdown', articles.articlecommentthumbsdown);
    app.use(adminAuth);
    app.post('/newArticle', articles.newArticle);
+   app.post('/newSurfboardDescription', surfboards.newSurfboardDescription)
    // app.post('/newComment/:id', posts.newComment);
 }
 

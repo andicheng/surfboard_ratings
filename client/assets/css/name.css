@@ -266,3 +266,36 @@ input, textarea{
    button.showreplies span{
       color: black;
    }
+   #surfboardDescription{
+      margin-bottom: 10px;
+   }
+      .titles{
+         font-size: 18px;
+         width: 95%;
+      }
+      #manufDescrip{
+         width: 45%;
+      }
+      #dimensions{
+         width: 30%;
+         /*display: inline-block;;*/
+      }
+         #dimensions table{
+            width: 100%;
+         }
+      #links{
+         width: 19%;
+         /*display: inline-block;;*/
+      }
+         iframe{
+            width: 100%;
+         }
+      #manufDescrip, #dimensions, #links{
+         padding: 0.5em;
+         display: inline-block;;
+         vertical-align: top;
+         border-color: white;
+         border-width: thin;;
+         border-style: groove;
+         height: auto;
+      }
