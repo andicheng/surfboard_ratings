@@ -133,7 +133,7 @@
                   Stability Rating: {{surfboard.stabilityrating}}
                   <br>Paddle Rating: {{surfboard.paddlerating}}
                </div>
-               <p>Review: {{surfboard.review}}</p>
+               <p id='description'>Review: {{surfboard.review}}</p>
                <!-- <p id="description">{{surfboard.description}}</p> -->
                <span class='thumbs'>{{surfboard.thumbsup.length}}</span><a href="" ng-click='surfboardthumbsup(surfboard)'><i class="em em---1"></i></a><span class="thumbs">{{surfboard.thumbsdown.length}}</span><a href="" ng-click='surfboardthumbsdown(surfboard)'><i class="em em--1"></i></a> <button class='reportcomment' ng-click='reportsurfboard = !reportsurfboard'>Report</button><br>
                <form class='report' ng-show='reportsurfboard'>
