@@ -78,13 +78,16 @@
 h3{
    display: inline-block;
    vertical-align: top;
-   width: 50%;
+   /*width: 50%;*/
    margin-right: 20%;
    margin-bottom: 10px;
 }
 label{
    display: inline-block;
    vertical-align: top;
+}
+#rightSide{
+   float: right;
 }
 #locations{
    padding: 1%;

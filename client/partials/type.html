@@ -70,14 +70,16 @@
    <div id="type">
       <p><font color="red"><b><i>{{errors.text.message}}</i></b></font></p>
       <h3>{{surfboards[0].type}} Surfboards - Reviewed {{surfboards.count}} time<span ng-if="surfboards.count>1">s</span></h3>
-      Sort: <select id="sort" ng-model="sortorder">
-         <option value="-createdAt">Date Posted</option>
-         <option value="-rating">Rating</option>
-         <option value="manufacturer">Brand</option>
-         <option value="name">Surfboard Name</option>
-         <option value="user[0].username">User Name</option>
-      </select>
-      <label><input ng-model="filter" placeholder="filter.."></label>
+      <div id='rightSide'>
+         Sort: <select id="sort" ng-model="sortorder">
+            <option value="-createdAt">Date Posted</option>
+            <option value="-rating">Rating</option>
+            <option value="manufacturer">Brand</option>
+            <option value="name">Surfboard Name</option>
+            <option value="user[0].username">User Name</option>
+         </select>
+         <label><input ng-model="filter" placeholder="filter.."></label>
+      </div>
       <div id="surfboard" ng-repeat="surfboard in surfboards | filter: filter | orderBy:sortorder">
          <!-- <p><b><i><a id="regionlink" href="#/region/{{surfboard.region}}">{{surfboard.region}}</a> - <a id="countrylink" href="#/country/{{surfboard.country}}">{{surfboard.country}}</a>: <a id="arealink" href="#/area/{{surfboard.area}}">{{surfboard.area}}</a></i></b></p> -->
          <p><b><a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="typelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a> - {{surfboard.customdims}} dimensions</b></p>

@@ -70,14 +70,16 @@
    <div id="locations">
       <p><font color="red"><b><i>{{errors.text.message}}</i></b></font></p>
       <h3>{{surfboards[0].manufacturer}} - Reviewed {{surfboards.count}} time<span ng-if="surfboards.count>1">s</span></h3>
-      Sort: <select id="sort" ng-model="sortorder">
-         <option value="-createdAt">Date Posted</option>
-         <option value="-rating">Rating</option>
-         <option value="type">Surfboard Type</option>
-         <option value="name">Surfboard Name</option>
-         <option value="user[0].username">User Name</option>
-      </select>
-      <label><input class='input' ng-model="filter" placeholder="filter.."></label>
+      <div id='rightSide'>
+         Sort: <select id="sort" ng-model="sortorder">
+            <option value="-createdAt">Date Posted</option>
+            <option value="-rating">Rating</option>
+            <option value="type">Surfboard Type</option>
+            <option value="name">Surfboard Name</option>
+            <option value="user[0].username">User Name</option>
+         </select>
+         <label><input class='input' ng-model="filter" placeholder="filter.."></label>
+      </div>
       <b><p>Overall Rating: {{surfboards.averageRating}}</p>
       <div class="rating">
          Speed Rating: {{surfboards.averagespeedRating}}
