@@ -17,7 +17,7 @@ app.controller('userController', ['$scope','usersFactory','surfboardsFactory', '
          if(!$scope.surfboards[i].user[0].birthdate){
             $scope.surfboards[i].user[0].age = "Not Provided"
          }else{
-         $scope.surfboards[i].user[0].age = Math.ceil(Math.abs(new Date() - new Date($scope.surfboards[i].user[0].birthdate))/(1000 * 3600 * 24 * 365));
+         $scope.surfboards[i].user[0].age = Math.floor(Math.abs(new Date() - new Date($scope.surfboards[i].user[0].birthdate))/(1000 * 3600 * 24 * 365));
          }
       }
       // var sum = 0
