@@ -2,14 +2,12 @@ app.controller('log_regController', ['$scope','usersFactory', '$location','$rout
 
    usersFactory.getUser(function(user){
       $scope.user = user;
-      console.log(user);
       $scope.newUser = {level: user.level,
                         fitness: user.fitness,
                         height: user.height,
                         weight: user.weight}
    });
    $scope.register = function(user){
-      console.log($scope.newUser)
       if($scope.newUser && $scope.newUser.password == $scope.newUser.confpass){
          if(!$scope.newUser.weight){
             $scope.newUser.weight = $scope.newUser.weightalt*2.20462;
@@ -18,7 +16,6 @@ app.controller('log_regController', ['$scope','usersFactory', '$location','$rout
             $scope.newUser.height = $scope.newUser.heightalt/2.54;
          }
          usersFactory.register($scope.newUser, function(data){
-            console.log(data)
             if(data.data.errors){
                $scope.errors = data.data.errors;
                // alert(data.data.errors.message)
@@ -58,7 +55,6 @@ app.controller('log_regController', ['$scope','usersFactory', '$location','$rout
    }
    $scope.forgot = function(user){
       usersFactory.forgot($scope.user, function(data){
-         console.log(data)
          if(data.data.errors){
             $scope.errors = data.data.errors;
             $scope.user = {};
@@ -73,7 +69,6 @@ app.controller('log_regController', ['$scope','usersFactory', '$location','$rout
    $scope.reset = function(user){
       if($scope.user.password == $scope.user.confirm){
          usersFactory.reset($routeParams.id, $scope.user, function(data){
-            console.log(data)
             if(data.data.errors){
                $scope.errors = data.data.errors;
                $scope.user = {};
@@ -95,7 +90,6 @@ app.controller('log_regController', ['$scope','usersFactory', '$location','$rout
          $scope.newUser.height = $scope.newUser.heightalt/2.54;
       }
       usersFactory.updateuser($scope.newUser, function(data){
-         console.log(data)
          if(data.data.errors){
             $scope.errors = data.data.errors;
             // alert(data.data.errors.message)

@@ -12,7 +12,6 @@ app.controller('manufacturerController', ['$scope','usersFactory','surfboardsFac
    var getManufacturerSurfboards = function(){
    surfboardsFactory.getManufacturerSurfboards($routeParams.id, function(returned_data){
       $scope.surfboards = returned_data;
-      console.log(returned_data);
       var sum=0;
       var sumspeedrating=0;
       var summaneuverabilityrating=0;

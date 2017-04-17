@@ -2,11 +2,9 @@ app.controller('userController', ['$scope','usersFactory','surfboardsFactory', '
 
    usersFactory.getUser(function(user){
       $scope.user = user;
-      console.log(user);
    });
    var getUserSurfboards = function(){
    surfboardsFactory.getUserSurfboards($routeParams.id, function(returned_data){
-      console.log(returned_data)
       // returned_data.boardlength = Math.floor(returned_data.boardlength/12)
       $scope.surfboards = returned_data;
       $scope.url = $location.absUrl();

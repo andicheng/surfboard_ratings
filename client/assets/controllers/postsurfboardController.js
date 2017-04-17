@@ -73,9 +73,7 @@ app.controller('postsurfboardController', ['$scope','usersFactory','surfboardsFa
       $location.url('/login')
    }
    $scope.newSurfboard = function(){
-      console.log($scope.mySurfboard)
       surfboardsFactory.newSurfboard($scope.mySurfboard, function(data){
-         console.log(data);
          if(data.data.errors){
             alert(data.data.errors.message);
          }else{

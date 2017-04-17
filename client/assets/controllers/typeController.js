@@ -6,7 +6,6 @@ app.controller('typeController', ['$scope','usersFactory','surfboardsFactory', '
    var getTypeSurfboards = function(){
    surfboardsFactory.getTypeSurfboards($routeParams.id, function(returned_data){
       $scope.surfboards = returned_data;
-      console.log(returned_data);
       var sum=0;
       var sumspeedrating=0;
       var summaneuverabilityrating=0;
