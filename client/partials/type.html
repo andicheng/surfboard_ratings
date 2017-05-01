@@ -82,7 +82,7 @@
       </div>
       <div id="surfboard" ng-repeat="surfboard in surfboards | filter: filter | orderBy:sortorder">
          <!-- <p><b><i><a id="regionlink" href="#/region/{{surfboard.region}}">{{surfboard.region}}</a> - <a id="countrylink" href="#/country/{{surfboard.country}}">{{surfboard.country}}</a>: <a id="arealink" href="#/area/{{surfboard.area}}">{{surfboard.area}}</a></i></b></p> -->
-         <p><b><a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="typelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a> - {{surfboard.customdims}} dimensions</b></p>
+         <p><b><a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="typelink" href="#/manufacturerName/{{surfboard.manufacturer}}/{{surfboard.name}}">{{surfboard.name}}</a> - {{surfboard.customdims}} dimensions</b></p>
          <p>Posted by <a class="typelink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
          <div class="rating">
             User age: {{surfboard.user[0].age}}

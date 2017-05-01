@@ -9,17 +9,20 @@ app.controller('nameController', ['$scope','usersFactory','surfboardsFactory', '
       // $scope.showreplies = false;
       $scope.url = $location.absUrl();
    });
-   var getSurfboardDescriptions = function(){
-      surfboardsFactory.getSurfboardDescriptions($routeParams.id, function(data){
+   var getSurfboardDescription = function(){
+      surfboardsFactory.getSurfboardDescription($routeParams.id, function(data){
          if(data.errors){
             console.log('error getting article')
          }else{
-            $scope.surfboarddescrip = data[0];
-            $scope.description = $sce.trustAsHtml($scope.surfboarddescrip.description);
+            console.log(data)
+            $scope.surfboarddescrips = data;
+            for(var i=0; i<$scope.surfboarddescrips.length; i++){
+               $scope.surfboarddescrips[i].description = $sce.trustAsHtml($scope.surfboarddescrips[i].description);
+            }
          }
       })
    };
-   getSurfboardDescriptions();
+   getSurfboardDescription();
    var getNameSurfboards = function(){
       surfboardsFactory.getNameSurfboards($routeParams.id, function(returned_data){
          $scope.surfboards = returned_data;

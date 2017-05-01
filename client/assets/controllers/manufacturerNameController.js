@@ -4,7 +4,7 @@ app.controller('manufacturerNameController', ['$scope','usersFactory','surfboard
       $scope.user = user;
    });
    var getSurfboardDescriptions = function(){
-      surfboardsFactory.getSurfboardDescriptions($routeParams.name, function(data){
+      surfboardsFactory.getSurfboardDescriptions($routeParams.manufacturer, $routeParams.name, function(data){
          if(data.errors){
             console.log('error getting article')
          }else{

@@ -90,7 +90,7 @@
          <br>Paddle Rating: {{surfboards.averagepaddleRating}}
       </div></b>
       <div id="surfboard" ng-repeat="surfboard in surfboards | filter: filter | orderBy:sortorder">
-         <p><b>{{surfboard.boardlength}} <a class="typelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a> - <a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - {{surfboard.customdims}} dimensions</b></p>
+         <p><b>{{surfboard.boardlength}} <a class="typelink" href="#/manufacturerName/{{surfboard.manufacturer}}/{{surfboard.name}}">{{surfboard.name}}</a> - <a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - {{surfboard.customdims}} dimensions</b></p>
          <p>Posted by <a id="userlink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
          <div class="rating">
             User age: {{surfboard.user[0].age}}

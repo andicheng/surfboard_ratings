@@ -112,7 +112,7 @@
             <div id="surfboard" ng-animate="'animate'" ng-repeat="surfboard in surfboards | filter: filter | limitTo: 12 | orderBy: '-createdAt'">
                <!-- <b><i><a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - <a id="namelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: <a id="namelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a></i></b>
                <b><p><a class="typelink" href="#/surfboard/{{surfboard._id}}">{{surfboard.title}}</a></p></b> -->
-               <p><b><a class="namelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="namelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a>- {{surfboard.customdims}} dimensions</b></p>
+               <p><b><a class="namelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a>: {{surfboard.boardlength}} <a class="namelink" href="#/manufacturerName/{{surfboard.manufacturer}}/{{surfboard.name}}">{{surfboard.name}}</a>- {{surfboard.customdims}} dimensions</b></p>
                <p>Posted by <a id="userlink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MM/dd/yyyy'}}</p>
                <div class="rating">
                   User age: {{surfboard.user[0].age}}

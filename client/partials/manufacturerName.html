@@ -69,7 +69,7 @@
    </div>
    <div id="locations">
       <p><font color="red"><b><i>{{errors.text.message}}</i></b></font></p>
-      <h3>{{surfboards[0].manufacturer}} {{surfboards[0].name}} </h3>
+      <h3><a class="typelink" href="#/manufacturer/{{surfboards[0].manufacturer}}">{{surfboards[0].manufacturer}}</a> {{surfboards[0].name}} </h3>
       <div id='surfboardDescription'>
          <p ng-bind-html='description'></p>
       </div>
@@ -94,7 +94,7 @@
          <br>Paddle Rating: {{surfboards.averagepaddleRating}}
       </div></b>
       <div id="surfboard" ng-repeat="surfboard in surfboards | filter: filter | orderBy:sortorder">
-         <p><b>{{surfboard.boardlength}} <a class="typelink" href="#/name/{{surfboard.name}}">{{surfboard.name}}</a> - <a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - {{surfboard.customdims}} dimensions</b></p>
+         <p><b>{{surfboard.boardlength}} {{surfboard.name}} - <a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - {{surfboard.customdims}} dimensions</b></p>
          <p>Posted by <a id="userlink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>
          <div class="rating">
             User age: {{surfboard.user[0].age}}

@@ -70,9 +70,6 @@
    <div id="locations">
       <p><font color="red"><b><i>{{errors.text.message}}</i></b></font></p>
       <h3>Surfboard: {{surfboards[0].name}}</h3>
-      <div id='surfboardDescription'>
-         <p ng-bind-html='description'></p>
-      </div>
       <h3>Reviewed {{surfboards.count}} time<span ng-if="surfboards.count>1">s</span></h3>
       <div id='rightSide'>
          Sort: <select id="sort" ng-model="sortorder">
@@ -94,6 +91,9 @@
          <br>Paddle Rating: {{surfboards.averagepaddleRating}}
       </div></b><div id='manufacturer' ng-repeat="surfboard in surfboards | unique: 'manufacturer' | filter: filter | filter:{manufacturer:surfboard.manufacturer}">
          <h4>Brand: <a class="typelink" href="#/manufacturer/{{surfboard.manufacturer}}">{{surfboard.manufacturer}}</a></h4>
+         <div id='surfboardDescription' ng-repeat="surfboarddescrip in surfboarddescrips">
+            <p ng-if='surfboarddescrip.manufacturer.toUpperCase() == surfboard.manufacturer.toUpperCase()' ng-bind-html='surfboarddescrip.description'></p>
+         </div>
          <div id="surfboard" ng-repeat="surfboard in surfboards | filter:{manufacturer:surfboard.manufacturer} | orderBy:sortorder">
             <p><b>{{surfboard.boardlength}} {{surfboard.name}} - <a class="typelink" href="#/type/{{surfboard.type}}">{{surfboard.type}}</a> - {{surfboard.customdims}} dimensions</b></p>
             <p>Posted by <a id="userlink" href="#/user/{{surfboard.user[0]._id}}">{{surfboard.user[0].username}}</a> on {{surfboard.createdAt | date:'MMM dd, yyyy'}}</p>

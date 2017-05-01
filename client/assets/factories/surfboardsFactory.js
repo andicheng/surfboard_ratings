@@ -40,8 +40,20 @@ app.factory('surfboardsFactory', ['$http','$location', function($http, $location
          callback(surfboards);
       })
    };
-   factory.getSurfboardDescriptions = function(name, callback){
-      $http.get('/surfboardDescriptions/'+name).then(function(returned_data){
+   factory.getAllSurfboardDescriptions = function(callback){
+      $http.get('/AllsurfboardDescriptions').then(function(returned_data){
+         surfboarddescrip = returned_data.data;
+         callback(surfboarddescrip);
+      })
+   };
+   factory.getSurfboardDescription = function(name, callback){
+      $http.get('/surfboardDescription/'+name).then(function(returned_data){
+         surfboarddescrip = returned_data.data;
+         callback(surfboarddescrip);
+      })
+   };
+   factory.getSurfboardDescriptions = function(manufacturer, name, callback){
+      $http.get('/surfboardDescriptions/'+manufacturer+'/'+name).then(function(returned_data){
          surfboarddescrip = returned_data.data;
          callback(surfboarddescrip);
       })

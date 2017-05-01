@@ -16,7 +16,9 @@ module.exports = function(app){
    app.get('/surfboards', surfboards.index);
    app.get('/manufacturerSurfboards/:id', surfboards.manufacturerSurfboards);
    app.get('/nameSurfboards/:id', surfboards.nameSurfboards);
-   app.get('/surfboardDescriptions/:id', surfboards.surfboardDescriptions);
+   app.get('/AllsurfboardDescriptions', surfboards.AllsurfboardDescriptions);
+   app.get('/surfboardDescription/:id', surfboards.surfboardDescription);
+   app.get('/surfboardDescriptions/:manufacturer/:name', surfboards.surfboardDescriptions);
    app.get('/typeSurfboards/:id', surfboards.typeSurfboards);
    app.get('/manufacturerNameSurfboards/:manufacturer/:name', surfboards.manufacturerNameSurfboards);
    app.get('/surfboard/:id', surfboards.surfboard);

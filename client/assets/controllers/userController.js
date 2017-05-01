@@ -1,8 +1,22 @@
-app.controller('userController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route) {
+app.controller('userController', ['$scope','usersFactory','surfboardsFactory', '$location','$routeParams', '$route', '$sce', function($scope, usersFactory, surfboardsFactory, $location, $routeParams, $route, $sce) {
 
    usersFactory.getUser(function(user){
       $scope.user = user;
    });
+   var getAllSurfboardDescriptions = function(){
+      surfboardsFactory.getAllSurfboardDescriptions(function(data){
+         if(data.errors){
+            console.log('error getting article')
+         }else{
+            console.log(data)
+            $scope.surfboarddescrips = data;
+            for(var i=0; i<$scope.surfboarddescrips.length; i++){
+               $scope.surfboarddescrips[i].description = $sce.trustAsHtml($scope.surfboarddescrips[i].description);
+            }
+         }
+      })
+   };
+   getAllSurfboardDescriptions();
    var getUserSurfboards = function(){
    surfboardsFactory.getUserSurfboards($routeParams.id, function(returned_data){
       // returned_data.boardlength = Math.floor(returned_data.boardlength/12)

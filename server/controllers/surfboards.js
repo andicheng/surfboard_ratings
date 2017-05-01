@@ -46,8 +46,30 @@ module.exports = {
          res.json(surfboards);
       })
    },
-   surfboardDescriptions: function(req,res){
+   AllsurfboardDescriptions: function(req,res){
+      SurfboardDetail.find({}).exec(function(err, surfboarddescrip){
+         if(err){
+            console.log('surfboard description loading error');
+            return res.sendStatus('500');
+         }else{
+            console.log('successfully getting surfboard descriptions');
+         }
+         res.json(surfboarddescrip);
+      })
+   },
+   surfboardDescription: function(req,res){
       SurfboardDetail.find({name: req.params.id}).exec(function(err, surfboarddescrip){
+         if(err){
+            console.log('surfboard description loading error');
+            return res.sendStatus('500');
+         }else{
+            console.log('successfully getting surfboard descriptions');
+         }
+         res.json(surfboarddescrip);
+      })
+   },
+   surfboardDescriptions: function(req,res){
+      SurfboardDetail.find({manufacturer: req.params.manufacturer, name: req.params.name}).exec(function(err, surfboarddescrip){
          if(err){
             console.log('surfboard description loading error');
             return res.sendStatus('500');
