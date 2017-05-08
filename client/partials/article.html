@@ -3,6 +3,10 @@
 <meta name="viewport" content="initial-scale=1.0">
 
 <div id="container" ng-controller="articleController">
+   <update-title title="Surfboard Ratings - Articles"></update-title>
+   <update-meta name="description" content={{article.title}}></update-meta>
+   <update-meta name="keywords" content={{article.keywords}}></update-meta>
+
    <div class="col6 offset-left2">
          <button class="btn btn-medium font-bold"
                 socialshare
